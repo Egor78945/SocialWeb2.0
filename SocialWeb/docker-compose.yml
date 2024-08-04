@@ -6,3 +6,9 @@ services:
     build: /service-discovery/.
     ports:
       - "8761:8761"
+
+  api-gateway:
+    container_name: api-gateway
+    build: /api-gateway/.
+    depends_on:
+      - service-discovery
