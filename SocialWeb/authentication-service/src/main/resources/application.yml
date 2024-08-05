@@ -21,9 +21,10 @@ eureka:
 
 grpc:
   client:
-    grpc-service:
+    user-grpc-service:
       address: 'discovery:///user-database-service'
       negotiation-type: plaintext
+
 
 server:
   port: 0

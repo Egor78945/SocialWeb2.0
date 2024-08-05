@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package com.example.grpc;
+
+message GetDetailsRequest {
+  string email = 1;
+}
+
+message GetDetailsResponse {
+
+  string password = 1;
+  repeated string roles = 2;
+}
+
+service UserService{
+  rpc getUserDetails (GetDetailsRequest) returns (GetDetailsResponse);
+}

@@ -1,5 +1,6 @@
 package org.example.authenticationservice.model.authentication;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.example.authenticationservice.enumeration.role.user.UserRole;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,8 +11,8 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class UserDetailsImplementation implements UserDetails {
-    private Long id;
     private String email;
     private String password;
     private List<UserRole> roles;
