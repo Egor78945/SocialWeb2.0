@@ -2,6 +2,7 @@ package org.example.authenticationservice.controller.authentication;
 
 import lombok.RequiredArgsConstructor;
 import org.example.authenticationservice.model.request.AuthenticationRequestModel;
+import org.example.authenticationservice.model.request.RegisterRequestModel;
 import org.example.authenticationservice.service.authentication.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,5 +19,10 @@ public class AuthenticationController {
     @GetMapping
     public ResponseEntity<String> login(@RequestBody AuthenticationRequestModel authModel){
         return ResponseEntity.ok(authenticationService.authenticate(authModel));
+    }
+
+    public ResponseEntity<String> register(@RequestBody RegisterRequestModel requestModel){
+        authenticationService.register(requestModel);
+        return ResponseEntity.ok("You have successfully registered.");
     }
 }

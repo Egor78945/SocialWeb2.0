@@ -3,7 +3,9 @@ package org.example.authenticationservice.service.authentication;
 import lombok.RequiredArgsConstructor;
 import org.example.authenticationservice.configuration.jwt.JWTConfiguration;
 import org.example.authenticationservice.model.request.AuthenticationRequestModel;
+import org.example.authenticationservice.model.request.RegisterRequestModel;
 import org.example.authenticationservice.service.UserService;
+import org.example.authenticationservice.util.validator.UserValidator;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,5 +25,11 @@ public class AuthenticationService {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authModel.getEmail(), authModel.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return jwtConfiguration.generateToken(authentication);
+    }
+
+    public void register(RegisterRequestModel requestModel) {
+        if(UserValidator.isValid(requestModel)){
+
+        }
     }
 }
