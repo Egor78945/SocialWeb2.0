@@ -5,10 +5,7 @@ import org.example.authenticationservice.model.request.AuthenticationRequestMode
 import org.example.authenticationservice.model.request.RegisterRequestModel;
 import org.example.authenticationservice.service.authentication.AuthenticationService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -17,12 +14,12 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @GetMapping
-    public ResponseEntity<String> login(@RequestBody AuthenticationRequestModel authModel){
+    public ResponseEntity<String> login(@RequestBody AuthenticationRequestModel authModel) {
         return ResponseEntity.ok(authenticationService.authenticate(authModel));
     }
 
-    public ResponseEntity<String> register(@RequestBody RegisterRequestModel requestModel){
-        authenticationService.register(requestModel);
-        return ResponseEntity.ok("You have successfully registered.");
+    @PostMapping
+    public ResponseEntity<String> register(@RequestBody RegisterRequestModel requestModel) {
+        return ResponseEntity.ok(String.format("You have successfully registered by id %s", authenticationService.register(requestModel)));
     }
 }

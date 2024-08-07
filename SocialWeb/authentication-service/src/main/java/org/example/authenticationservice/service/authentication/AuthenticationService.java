@@ -5,6 +5,7 @@ import org.example.authenticationservice.configuration.jwt.JWTConfiguration;
 import org.example.authenticationservice.model.request.AuthenticationRequestModel;
 import org.example.authenticationservice.model.request.RegisterRequestModel;
 import org.example.authenticationservice.service.UserService;
+import org.example.authenticationservice.service.grpc.UserGrpcService;
 import org.example.authenticationservice.util.validator.UserValidator;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
+    private final UserGrpcService userGrpcService;
     private final PasswordEncoder passwordEncoder;
     private final JWTConfiguration jwtConfiguration;
     private final UserService userService;
@@ -27,9 +29,9 @@ public class AuthenticationService {
         return jwtConfiguration.generateToken(authentication);
     }
 
-    public void register(RegisterRequestModel requestModel) {
-        if(UserValidator.isValid(requestModel)){
-
-        }
+    public Long register(RegisterRequestModel requestModel) {
+        if (UserValidator.isValid(requestModel) && userGrpcService.getEmailUniqueRequest(requestModel.getEmail()).getResult()) {
+            return userGrpcService.registerUser(requestModel).getId();
+        } else throw new IllegalArgumentException("Bad registration data or email is busy.");
     }
 }
