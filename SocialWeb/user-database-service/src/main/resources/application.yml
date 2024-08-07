@@ -1,0 +1,35 @@
+spring:
+
+  application:
+    name: user-database-service
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://postgres:5432/users
+    username: bestuser
+    password: bestuser
+
+  jpa:
+    database: postgresql
+    show-sql: true
+
+  liquibase:
+    change-log:
+
+  data:
+    jdbc:
+      dialect: postgresql
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-discovery:8761/eureka
+    register-with-eureka: true
+    fetch-registry: false
+
+server:
+  port: 0
+
+grpc:
+  server:
+    port: 9090

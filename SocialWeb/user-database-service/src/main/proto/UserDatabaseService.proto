@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package com.example.grpc;
+
+message GetDetailsRequest {
+  string email = 1;
+}
+
+message GetDetailsResponse {
+  string password = 1;
+  repeated string roles = 2;
+}
+
+message GetEmailUniqueRequest{
+  string email = 1;
+}
+
+message GetEmailUniqueResponse{
+  bool result = 1;
+}
+
+message RegisterUserRequest{
+  string name = 1;
+  string surname = 2;
+  int32 age = 3;
+  string email = 4;
+  string city = 5;
+  string password = 6;
+}
+
+message RegisterUserResponse {
+  int64 id = 1;
+}
+
+service UserService{
+  rpc getUserDetails (GetDetailsRequest) returns (GetDetailsResponse);
+  rpc getEmailUnique (GetEmailUniqueRequest) returns (GetEmailUniqueResponse);
+  rpc registerUser (RegisterUserRequest) returns (RegisterUserResponse);
+}
