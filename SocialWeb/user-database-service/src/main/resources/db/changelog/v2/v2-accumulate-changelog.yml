@@ -1,4 +1,4 @@
 databaseChangeLog:
   - include:
-      file: v2-create-friendship-table-changelog.yml
+      file: v2-create-user-roles-table-changelog.yml
       relativeToChangelogFile: true

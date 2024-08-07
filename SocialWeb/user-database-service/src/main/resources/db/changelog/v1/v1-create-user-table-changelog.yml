@@ -17,6 +17,7 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     unique: true
+                    nullable: false
                   autoIncrement: true
               - column:
                   name: name

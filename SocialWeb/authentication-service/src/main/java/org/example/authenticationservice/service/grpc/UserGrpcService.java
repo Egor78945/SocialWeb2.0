@@ -2,11 +2,15 @@ package org.example.authenticationservice.service.grpc;
 
 import com.example.grpc.UserDatabaseService;
 import com.example.grpc.UserServiceGrpc;
+import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
+import org.example.authenticationservice.enumeration.role.user.UserRole;
 import org.example.authenticationservice.model.request.RegisterRequestModel;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserGrpcService {
     @GrpcClient("user-grpc-service")
     private UserServiceGrpc.UserServiceBlockingStub userServiceBlockingStub;
@@ -36,6 +40,7 @@ public class UserGrpcService {
                 .setEmail(requestModel.getEmail())
                 .setCity(requestModel.getCity())
                 .setPassword(requestModel.getPassword())
+                .addRole(UserRole.USER_ROLE.name())
                 .build();
         return userServiceBlockingStub.registerUser(request);
     }
