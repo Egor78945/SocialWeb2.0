@@ -5,11 +5,17 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: authentication-service
+          uri: lb://authentication-service
+          predicates:
+            - Path=/auth
 
 eureka:
   client:
     service-url:
       defaultZone: http://service-discovery:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
 
 logging:
   level:

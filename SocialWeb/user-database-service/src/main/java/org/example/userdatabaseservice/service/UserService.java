@@ -19,7 +19,7 @@ public class UserService {
     }
 
     public boolean getUserExists(String email){
-        return userRepository.findUserExistsByEmail(email);
+        return userRepository.existsUserByEmail(email);
     }
 
     public Long registerUser(User user){

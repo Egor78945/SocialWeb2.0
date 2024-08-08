@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
-    @Query("SELECT r.role from Role r where r.user_id = ?1")
+    @Query("SELECT r.user_role from Role r where r.user_id = ?1")
     List<String> findRoleByUserId(Long id);
 }

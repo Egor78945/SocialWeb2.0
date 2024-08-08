@@ -21,7 +21,7 @@ public class UserValidator {
     }
 
     private static boolean checkPassword(String password) {
-        if (password.length() >= 10 && password.length() <= 20) {
+        if (password.length() >= 10 && password.length() <= 50) {
             int digitCount = 0;
             int letterCount = 0;
             for (char c : password.toCharArray()) {

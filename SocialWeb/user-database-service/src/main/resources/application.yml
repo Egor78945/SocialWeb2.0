@@ -5,7 +5,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://postgres:5432/users
+    url: jdbc:postgresql://postgres:5432/social_web
     username: bestuser
     password: bestuser
 
@@ -14,7 +14,7 @@ spring:
     show-sql: true
 
   liquibase:
-    change-log:
+    change-log: db/changelog/main/main-changelog.yml
 
   data:
     jdbc:

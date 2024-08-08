@@ -1,6 +1,18 @@
 version: '3.7'
 
 services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_DB: social_web
+      POSTGRES_USER: bestuser
+      POSTGRES_PASSWORD: bestuser
+    volumes:
+      - D:\postgres_datapart:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
   service-discovery:
     container_name: service-discovery
     build: /service-discovery/.
@@ -10,5 +22,20 @@ services:
   api-gateway:
     container_name: api-gateway
     build: /api-gateway/.
+    ports:
+      - "8080:8080"
     depends_on:
       - service-discovery
+
+  authentication-service:
+    container_name: authentication-service
+    build: /authentication-service/.
+    depends_on:
+      - postgres
+      - api-gateway
+
+  user-database-service:
+    container_name: user-database-service
+    build: /user-database-service/.
+    depends_on:
+      - authentication-service
