@@ -39,3 +39,11 @@ services:
     build: /user-database-service/.
     depends_on:
       - authentication-service
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=1

@@ -33,8 +33,20 @@ message RegisterUserResponse {
   int64 id = 1;
 }
 
+message GetProfileInformationResponse {
+  int64 id = 1;
+  string name = 2;
+  string surname = 3;
+  int32 age = 4;
+  string city = 5;
+  int32 friendCount = 6;
+  string registerDate = 7;
+  string status = 8;
+}
+
 service UserService{
   rpc getUserDetails (GetDetailsRequest) returns (GetDetailsResponse);
   rpc getEmailUnique (GetEmailUniqueRequest) returns (GetEmailUniqueResponse);
   rpc registerUser (RegisterUserRequest) returns (RegisterUserResponse);
+  rpc getProfileInformation (GetDetailsRequest) returns (GetProfileInformationResponse);
 }

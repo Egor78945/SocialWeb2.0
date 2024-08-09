@@ -1,5 +1,6 @@
-package org.example.authenticationservice.controller.authentication;
+package org.example.authenticationservice.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.example.authenticationservice.model.request.AuthenticationRequestModel;
 import org.example.authenticationservice.model.request.RegisterRequestModel;
@@ -14,7 +15,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @GetMapping
-    public ResponseEntity<String> login(@RequestBody AuthenticationRequestModel authModel) {
+    public ResponseEntity<String> login(@RequestBody AuthenticationRequestModel authModel) throws JsonProcessingException {
         return ResponseEntity.ok(authenticationService.authenticate(authModel));
     }
 

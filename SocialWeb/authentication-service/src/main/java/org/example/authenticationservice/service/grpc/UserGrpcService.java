@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.example.authenticationservice.enumeration.role.user.UserRole;
 import org.example.authenticationservice.model.request.RegisterRequestModel;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -43,5 +42,13 @@ public class UserGrpcService {
                 .addRole(UserRole.USER_ROLE.name())
                 .build();
         return userServiceBlockingStub.registerUser(request);
+    }
+
+    public UserDatabaseService.GetProfileInformationResponse getProfileInformation(String email){
+        UserDatabaseService.GetDetailsRequest request = UserDatabaseService.GetDetailsRequest
+                .newBuilder()
+                .setEmail(email)
+                .build();
+        return userServiceBlockingStub.getProfileInformation(request);
     }
 }

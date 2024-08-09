@@ -15,4 +15,12 @@ public class Role {
     private Long user_id;
     @Column(name = "user_role")
     private String user_role;
+
+    public Role(Long user_id, String user_role) {
+        this.user_id = user_id;
+        this.user_role = user_role;
+    }
+
+    public Role() {
+    }
 }
