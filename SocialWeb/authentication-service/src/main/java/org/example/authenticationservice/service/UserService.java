@@ -2,7 +2,10 @@ package org.example.authenticationservice.service;
 
 import com.example.grpc.UserDatabaseService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.RequiredArgsConstructor;
+import org.example.authenticationservice.enumeration.redis.RedisKey;
 import org.example.authenticationservice.model.authentication.UserDetailsImplementation;
 import org.example.authenticationservice.model.response.UserProfile;
 import org.example.authenticationservice.service.grpc.UserGrpcService;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 public class UserService implements UserDetailsService {
     private final UserGrpcService userGrpcService;
     private final RedisService redisService;
+    private final JsonMapper jsonMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -30,10 +34,16 @@ public class UserService implements UserDetailsService {
     }
 
     public UserProfile getUserProfile() throws JsonProcessingException {
-        return redisService.getObject("current", UserProfile.class);
+        return jsonMapper.readValue(redisService.getObject(RedisKey.CURRENT_KEY.name()), UserProfile.class);
     }
 
     public UserProfile getUserProfileInformationRequest(Long id) throws JsonProcessingException {
-        return new UserProfile(userGrpcService.getProfileInformation(id));
+        String userProfileString = redisService.getFromHash(RedisKey.USERS_KEY.name(), id.toString());
+        if (userProfileString == null) {
+            UserProfile userProfile = new UserProfile(userGrpcService.getProfileInformation(id));
+            redisService.saveToHash(RedisKey.USERS_KEY.name(), id.toString(), userProfile);
+            return userProfile;
+        }
+        return jsonMapper.readValue(userProfileString, UserProfile.class);
     }
 }

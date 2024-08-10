@@ -16,7 +16,15 @@ public class RedisService {
         redisTemplate.opsForValue().set(key, jsonMapper.writeValueAsString(value));
     }
 
-    public <T> T getObject(String key, Class<T> valueClass) throws JsonProcessingException {
-        return jsonMapper.readValue((String) redisTemplate.opsForValue().get(key), valueClass);
+    public String getObject(String key) throws JsonProcessingException {
+        return (String) redisTemplate.opsForValue().get(key);
+    }
+
+    public void saveToHash(String key, String hashKey, Object value) throws JsonProcessingException {
+        redisTemplate.opsForHash().put(key, hashKey, jsonMapper.writeValueAsString(value));
+    }
+
+    public String getFromHash(String key, String hashKey) throws JsonProcessingException {
+        return (String) redisTemplate.opsForHash().get(key, hashKey);
     }
 }

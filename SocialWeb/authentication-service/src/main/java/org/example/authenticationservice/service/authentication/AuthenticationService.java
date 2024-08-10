@@ -3,6 +3,7 @@ package org.example.authenticationservice.service.authentication;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.example.authenticationservice.configuration.jwt.JWTConfiguration;
+import org.example.authenticationservice.enumeration.redis.RedisKey;
 import org.example.authenticationservice.model.request.AuthenticationRequestModel;
 import org.example.authenticationservice.model.request.RegisterRequestModel;
 import org.example.authenticationservice.service.UserService;
@@ -28,7 +29,7 @@ public class AuthenticationService {
 
     public String authenticate(AuthenticationRequestModel authModel) throws JsonProcessingException {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authModel.getEmail(), authModel.getPassword()));
-        redisService.saveObject("current", userService.getUserProfileInformationRequest(authModel.getEmail()));
+        redisService.saveObject(RedisKey.CURRENT_KEY.name(), userService.getUserProfileInformationRequest(authModel.getEmail()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return jwtConfiguration.generateToken(authentication);
     }

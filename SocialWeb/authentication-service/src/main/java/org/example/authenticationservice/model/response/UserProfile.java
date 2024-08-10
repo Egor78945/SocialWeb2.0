@@ -25,6 +25,17 @@ public class UserProfile {
         this.status = response.getStatus();
     }
 
+    public UserProfile(Long id, String name, String surname, int age, String city, int friendCount, String registerDate, String status) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.city = city;
+        this.friendCount = friendCount;
+        this.registerDate = registerDate;
+        this.status = status;
+    }
+
     public UserProfile() {
     }
 }
