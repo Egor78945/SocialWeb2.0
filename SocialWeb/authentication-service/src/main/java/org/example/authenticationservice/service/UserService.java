@@ -18,17 +18,22 @@ import org.springframework.stereotype.Service;
 public class UserService implements UserDetailsService {
     private final UserGrpcService userGrpcService;
     private final RedisService redisService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDatabaseService.GetDetailsResponse response = userGrpcService.getDetailsRequest(username);
         return new UserDetailsImplementation(username, response.getPassword(), UserConverter.convertTo(response.getRolesList()));
     }
 
-    public UserProfile getUserProfileInformationRequest(String email){
+    public UserProfile getUserProfileInformationRequest(String email) {
         return new UserProfile(userGrpcService.getProfileInformation(email));
     }
 
     public UserProfile getUserProfile() throws JsonProcessingException {
         return redisService.getObject("current", UserProfile.class);
+    }
+
+    public UserProfile getUserProfileInformationRequest(Long id) throws JsonProcessingException {
+        return new UserProfile(userGrpcService.getProfileInformation(id));
     }
 }

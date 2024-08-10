@@ -4,6 +4,7 @@ package com.example.grpc;
 
 message GetDetailsRequest {
   string email = 1;
+  int64 id = 2;
 }
 
 message GetDetailsResponse {

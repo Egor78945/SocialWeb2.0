@@ -54,7 +54,12 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
     public void getProfileInformation(UserDatabaseService.GetDetailsRequest request, StreamObserver<UserDatabaseService.GetProfileInformationResponse> responseObserver) {
-        UserProfileRequestModel requestModel = userService.getUserProfileInformation(request.getEmail());
+        UserProfileRequestModel requestModel;
+        if(!request.getEmail().isEmpty()) {
+            requestModel = userService.getUserProfileInformation(request.getEmail());
+        } else {
+            requestModel = userService.getUserProfileInformation(request.getId());
+        }
         UserDatabaseService.GetProfileInformationResponse response = UserDatabaseService.GetProfileInformationResponse
                 .newBuilder()
                 .setId(requestModel.getId())

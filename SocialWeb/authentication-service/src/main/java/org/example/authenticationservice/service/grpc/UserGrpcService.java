@@ -51,4 +51,11 @@ public class UserGrpcService {
                 .build();
         return userServiceBlockingStub.getProfileInformation(request);
     }
+    public UserDatabaseService.GetProfileInformationResponse getProfileInformation(Long id){
+        UserDatabaseService.GetDetailsRequest request = UserDatabaseService.GetDetailsRequest
+                .newBuilder()
+                .setId(id)
+                .build();
+        return userServiceBlockingStub.getProfileInformation(request);
+    }
 }

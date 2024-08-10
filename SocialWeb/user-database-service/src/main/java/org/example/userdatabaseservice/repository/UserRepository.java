@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsUserByEmail(String email);
     @Query("SELECT new org.example.userdatabaseservice.model.UserProfileRequestModel(u.id, u.name, u.surname, u.age, u.city, u.friendCount, u.registerDate, u.status) from User u where u.email=?1")
     UserProfileRequestModel findUserProfileInformationByEmail(String email);
+    @Query("SELECT new org.example.userdatabaseservice.model.UserProfileRequestModel(u.id, u.name, u.surname, u.age, u.city, u.friendCount, u.registerDate, u.status) from User u where u.id=?1")
+    UserProfileRequestModel findUserProfileInformationById(Long id);
 }

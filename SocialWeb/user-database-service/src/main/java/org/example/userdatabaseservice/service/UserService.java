@@ -35,4 +35,8 @@ public class UserService {
     public UserProfileRequestModel getUserProfileInformation(String email) {
         return userRepository.findUserProfileInformationByEmail(email);
     }
+    @Transactional
+    public UserProfileRequestModel getUserProfileInformation(Long id) {
+        return userRepository.findUserProfileInformationById(id);
+    }
 }

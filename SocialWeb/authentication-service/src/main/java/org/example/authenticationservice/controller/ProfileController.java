@@ -6,6 +6,7 @@ import org.example.authenticationservice.model.response.UserProfile;
 import org.example.authenticationservice.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,4 +19,11 @@ public class ProfileController {
     public ResponseEntity<UserProfile> myProfile() throws JsonProcessingException {
         return ResponseEntity.ok(userService.getUserProfile());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserProfile> userProfile(@PathVariable("id") Long id) throws JsonProcessingException {
+        return ResponseEntity.ok(userService.getUserProfileInformationRequest(id));
+    }
+
+
 }
