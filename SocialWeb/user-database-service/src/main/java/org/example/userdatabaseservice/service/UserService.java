@@ -39,4 +39,9 @@ public class UserService {
     public UserProfileRequestModel getUserProfileInformation(Long id) {
         return userRepository.findUserProfileInformationById(id);
     }
+
+    @Transactional
+    public void changeUserNameById(Long id, String name){
+        userRepository.updateUserNameById(id, name);
+    }
 }

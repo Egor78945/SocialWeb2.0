@@ -59,4 +59,13 @@ public class UserGrpcService {
                 .build();
         return userServiceBlockingStub.getProfileInformationById(request);
     }
+
+    public Boolean changeName(Long userId, String newName){
+        UserDatabaseService.LongStringRequest request = UserDatabaseService.LongStringRequest
+                .newBuilder()
+                .setLong(userId)
+                .setString(newName)
+                .build();
+        return userServiceBlockingStub.changeName(request).getBoolean();
+    }
 }

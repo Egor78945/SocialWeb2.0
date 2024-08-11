@@ -2,7 +2,6 @@ package org.example.authenticationservice.service;
 
 import com.example.grpc.UserDatabaseService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.RequiredArgsConstructor;
 import org.example.authenticationservice.enumeration.redis.RedisKey;
@@ -29,7 +28,7 @@ public class UserService implements UserDetailsService {
         return new UserDetailsImplementation(username, response.getPassword(), UserConverter.convertTo(response.getRolesList()));
     }
 
-    public UserProfile getUserProfileInformationRequest(String email) {
+    public UserProfile getUserProfile(String email) {
         return new UserProfile(userGrpcService.getProfileInformation(email));
     }
 
@@ -37,13 +36,17 @@ public class UserService implements UserDetailsService {
         return jsonMapper.readValue(redisService.getObject(RedisKey.CURRENT_KEY.name()), UserProfile.class);
     }
 
-    public UserProfile getUserProfileInformationRequest(Long id) throws JsonProcessingException {
-        String userProfileString = redisService.getFromHash(RedisKey.USERS_KEY.name(), id.toString());
-        if (userProfileString == null) {
-            UserProfile userProfile = new UserProfile(userGrpcService.getProfileInformation(id));
-            redisService.saveToHash(RedisKey.USERS_KEY.name(), id.toString(), userProfile);
-            return userProfile;
-        }
-        return jsonMapper.readValue(userProfileString, UserProfile.class);
+    public UserProfile getUserProfile(Long id) {
+        return new UserProfile(userGrpcService.getProfileInformation(id));
+    }
+
+    public void changeName(String name) throws JsonProcessingException {
+        if (!name.isEmpty() && !name.isBlank() && name.length() <= 30) {
+            if (userGrpcService.changeName(getUserProfile().getId(), name)) {
+                UserProfile userProfile = getUserProfile();
+                userProfile.setName(name);
+                redisService.saveObject(RedisKey.CURRENT_KEY.name(), userProfile);
+            }
+        } else throw new IllegalArgumentException("Illegal name format.");
     }
 }

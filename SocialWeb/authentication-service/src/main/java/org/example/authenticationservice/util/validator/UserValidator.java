@@ -12,7 +12,7 @@ public class UserValidator {
                 && checkEmail(requestModel.getEmail());
     }
 
-    private static boolean checkEmail(String email) {
+    public static boolean checkEmail(String email) {
         String[] emailArray = email.split("@");
         return emailArray.length == 2
                 && (emailArray[1].equals("gmail.com") || emailArray[1].equals("mail.ru"))
@@ -20,7 +20,7 @@ public class UserValidator {
                 && emailArray[0].length() <= 100;
     }
 
-    private static boolean checkPassword(String password) {
+    public static boolean checkPassword(String password) {
         if (password.length() >= 10 && password.length() <= 50) {
             int digitCount = 0;
             int letterCount = 0;

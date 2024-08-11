@@ -5,10 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.authenticationservice.model.response.UserProfile;
 import org.example.authenticationservice.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/profile")
@@ -22,8 +19,12 @@ public class ProfileController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserProfile> userProfile(@PathVariable("id") Long id) throws JsonProcessingException {
-        return ResponseEntity.ok(userService.getUserProfileInformationRequest(id));
+        return ResponseEntity.ok(userService.getUserProfile(id));
     }
 
-
+    @PatchMapping("/name")
+    public ResponseEntity<String> changeName(@RequestParam("newName") String name) throws JsonProcessingException {
+        userService.changeName(name);
+        return ResponseEntity.ok("Your name has been updated.");
+    }
 }

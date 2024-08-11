@@ -6,7 +6,6 @@ import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.example.userdatabaseservice.model.UserProfileRequestModel;
-import org.example.userdatabaseservice.model.entity.Role;
 import org.example.userdatabaseservice.service.RoleService;
 import org.example.userdatabaseservice.service.UserService;
 import org.example.userdatabaseservice.util.converter.UserConverter;
@@ -63,6 +62,17 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     public void getProfileInformationById(UserDatabaseService.LongRequest request, StreamObserver<UserDatabaseService.GetProfileInformationResponse> responseObserver) {
         UserProfileRequestModel requestModel = userService.getUserProfileInformation(request.getLong());
         UserDatabaseService.GetProfileInformationResponse response = UserConverter.convertTo(requestModel);
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void changeName(UserDatabaseService.LongStringRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
+        userService.changeUserNameById(request.getLong(), request.getString());
+        UserDatabaseService.BooleanResponse response = UserDatabaseService.BooleanResponse
+                .newBuilder()
+                .setBoolean(true)
+                .build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

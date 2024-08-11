@@ -44,10 +44,16 @@ message GetProfileInformationResponse {
   string status = 8;
 }
 
+message LongStringRequest{
+  int64 long = 1;
+  string string = 2;
+}
+
 service UserService{
   rpc getUserDetails (StringRequest) returns (DetailsResponse);
   rpc getEmailUnique (StringRequest) returns (BooleanResponse);
   rpc registerUser (RegisterUserRequest) returns (LongResponse);
   rpc getProfileInformationByEmail (StringRequest) returns (GetProfileInformationResponse);
   rpc getProfileInformationById (LongRequest) returns (GetProfileInformationResponse);
+  rpc changeName(LongStringRequest) returns (BooleanResponse);
 }

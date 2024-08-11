@@ -29,7 +29,7 @@ public class AuthenticationService {
 
     public String authenticate(AuthenticationRequestModel authModel) throws JsonProcessingException {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authModel.getEmail(), authModel.getPassword()));
-        redisService.saveObject(RedisKey.CURRENT_KEY.name(), userService.getUserProfileInformationRequest(authModel.getEmail()));
+        redisService.saveObject(RedisKey.CURRENT_KEY.name(), userService.getUserProfile(authModel.getEmail()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return jwtConfiguration.generateToken(authentication);
     }
@@ -38,6 +38,6 @@ public class AuthenticationService {
         if (UserValidator.isValid(requestModel) && userGrpcService.getEmailUniqueRequest(requestModel.getEmail()).getBoolean()) {
             requestModel.setPassword(passwordEncoder.encode(requestModel.getPassword()));
             return userGrpcService.registerUser(requestModel).getLong();
-        } else throw new IllegalArgumentException("Bad registration data or email is busy.");
+        } else throw new IllegalArgumentException("Illegal registration data format or email is busy.");
     }
 }
