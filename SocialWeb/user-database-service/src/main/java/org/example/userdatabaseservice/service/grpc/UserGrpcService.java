@@ -41,12 +41,12 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
     @Transactional
-    public void registerUser(UserDatabaseService.RegisterUserRequest request, StreamObserver<UserDatabaseService.RegisterUserResponse> responseObserver) {
+    public void registerUser(UserDatabaseService.RegisterUserRequest request, StreamObserver<UserDatabaseService.LongResponse> responseObserver) {
         Long savedUserId = userService.registerUser(UserConverter.convertTo(request));
         roleService.saveRole(savedUserId, request.getRoleList());
-        UserDatabaseService.RegisterUserResponse response = UserDatabaseService.RegisterUserResponse
+        UserDatabaseService.LongResponse response = UserDatabaseService.LongResponse
                 .newBuilder()
-                .setId(savedUserId)
+                .setLong(savedUserId)
                 .build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();

@@ -29,8 +29,8 @@ message RegisterUserRequest{
   repeated string role = 7;
 }
 
-message RegisterUserResponse {
-  int64 id = 1;
+message LongResponse {
+  int64 long = 1;
 }
 
 message GetProfileInformationResponse {
@@ -47,7 +47,7 @@ message GetProfileInformationResponse {
 service UserService{
   rpc getUserDetails (StringRequest) returns (DetailsResponse);
   rpc getEmailUnique (StringRequest) returns (BooleanResponse);
-  rpc registerUser (RegisterUserRequest) returns (RegisterUserResponse);
+  rpc registerUser (RegisterUserRequest) returns (LongResponse);
   rpc getProfileInformationByEmail (StringRequest) returns (GetProfileInformationResponse);
   rpc getProfileInformationById (LongRequest) returns (GetProfileInformationResponse);
 }

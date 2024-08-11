@@ -30,7 +30,7 @@ public class UserGrpcService {
         return userServiceBlockingStub.getEmailUnique(request);
     }
 
-    public UserDatabaseService.RegisterUserResponse registerUser(RegisterRequestModel requestModel) {
+    public UserDatabaseService.LongResponse registerUser(RegisterRequestModel requestModel) {
         UserDatabaseService.RegisterUserRequest request = UserDatabaseService.RegisterUserRequest
                 .newBuilder()
                 .setName(requestModel.getName())
