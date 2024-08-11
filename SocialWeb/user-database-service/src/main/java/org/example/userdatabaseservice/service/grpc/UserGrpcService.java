@@ -19,11 +19,11 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     private final RoleService roleService;
 
     @Override
-    public void getUserDetails(UserDatabaseService.GetDetailsRequest request, StreamObserver<UserDatabaseService.GetDetailsResponse> responseObserver) {
-        UserDatabaseService.GetDetailsResponse response = UserDatabaseService.GetDetailsResponse
+    public void getUserDetails(UserDatabaseService.StringRequest request, StreamObserver<UserDatabaseService.DetailsResponse> responseObserver) {
+        UserDatabaseService.DetailsResponse response = UserDatabaseService.DetailsResponse
                 .newBuilder()
-                .setPassword(userService.getPassword(request.getEmail()))
-                .addAllRoles(roleService.getRole(userService.getUserId(request.getEmail())))
+                .setPassword(userService.getPassword(request.getString()))
+                .addAllRoles(roleService.getRole(userService.getUserId(request.getString())))
                 .build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
@@ -53,24 +53,16 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     }
 
     @Override
-    public void getProfileInformation(UserDatabaseService.GetDetailsRequest request, StreamObserver<UserDatabaseService.GetProfileInformationResponse> responseObserver) {
-        UserProfileRequestModel requestModel;
-        if(!request.getEmail().isEmpty()) {
-            requestModel = userService.getUserProfileInformation(request.getEmail());
-        } else {
-            requestModel = userService.getUserProfileInformation(request.getId());
-        }
-        UserDatabaseService.GetProfileInformationResponse response = UserDatabaseService.GetProfileInformationResponse
-                .newBuilder()
-                .setId(requestModel.getId())
-                .setName(requestModel.getName())
-                .setSurname(requestModel.getSurname())
-                .setAge(requestModel.getAge())
-                .setCity(requestModel.getCity())
-                .setFriendCount(requestModel.getFriendCount())
-                .setRegisterDate(requestModel.getRegisterDate().toString())
-                .setStatus(requestModel.getStatus())
-                .build();
+    public void getProfileInformationByEmail(UserDatabaseService.StringRequest request, StreamObserver<UserDatabaseService.GetProfileInformationResponse> responseObserver) {
+        UserProfileRequestModel requestModel = userService.getUserProfileInformation(request.getString());
+        UserDatabaseService.GetProfileInformationResponse response = UserConverter.convertTo(requestModel);
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+    @Override
+    public void getProfileInformationById(UserDatabaseService.LongRequest request, StreamObserver<UserDatabaseService.GetProfileInformationResponse> responseObserver) {
+        UserProfileRequestModel requestModel = userService.getUserProfileInformation(request.getLong());
+        UserDatabaseService.GetProfileInformationResponse response = UserConverter.convertTo(requestModel);
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

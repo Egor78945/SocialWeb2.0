@@ -14,10 +14,10 @@ public class UserGrpcService {
     @GrpcClient("user-grpc-service")
     private UserServiceGrpc.UserServiceBlockingStub userServiceBlockingStub;
 
-    public UserDatabaseService.GetDetailsResponse getDetailsRequest(String email) {
-        UserDatabaseService.GetDetailsRequest request = UserDatabaseService.GetDetailsRequest
+    public UserDatabaseService.DetailsResponse getDetailsRequest(String email) {
+        UserDatabaseService.StringRequest request = UserDatabaseService.StringRequest
                 .newBuilder()
-                .setEmail(email)
+                .setString(email)
                 .build();
         return userServiceBlockingStub.getUserDetails(request);
     }
@@ -44,18 +44,19 @@ public class UserGrpcService {
         return userServiceBlockingStub.registerUser(request);
     }
 
-    public UserDatabaseService.GetProfileInformationResponse getProfileInformation(String email){
-        UserDatabaseService.GetDetailsRequest request = UserDatabaseService.GetDetailsRequest
+    public UserDatabaseService.GetProfileInformationResponse getProfileInformation(String email) {
+        UserDatabaseService.StringRequest request = UserDatabaseService.StringRequest
                 .newBuilder()
-                .setEmail(email)
+                .setString(email)
                 .build();
-        return userServiceBlockingStub.getProfileInformation(request);
+        return userServiceBlockingStub.getProfileInformationByEmail(request);
     }
-    public UserDatabaseService.GetProfileInformationResponse getProfileInformation(Long id){
-        UserDatabaseService.GetDetailsRequest request = UserDatabaseService.GetDetailsRequest
+
+    public UserDatabaseService.GetProfileInformationResponse getProfileInformation(Long id) {
+        UserDatabaseService.LongRequest request = UserDatabaseService.LongRequest
                 .newBuilder()
-                .setId(id)
+                .setLong(id)
                 .build();
-        return userServiceBlockingStub.getProfileInformation(request);
+        return userServiceBlockingStub.getProfileInformationById(request);
     }
 }
