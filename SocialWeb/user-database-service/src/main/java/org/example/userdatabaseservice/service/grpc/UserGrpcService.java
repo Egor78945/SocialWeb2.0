@@ -30,10 +30,10 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     }
 
     @Override
-    public void getEmailUnique(UserDatabaseService.GetEmailUniqueRequest request, StreamObserver<UserDatabaseService.GetEmailUniqueResponse> responseObserver) {
-        UserDatabaseService.GetEmailUniqueResponse response = UserDatabaseService.GetEmailUniqueResponse
+    public void getEmailUnique(UserDatabaseService.StringRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
+        UserDatabaseService.BooleanResponse response = UserDatabaseService.BooleanResponse
                 .newBuilder()
-                .setResult(!userService.getUserExists(request.getEmail()))
+                .setBoolean(!userService.getUserExists(request.getString()))
                 .build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();

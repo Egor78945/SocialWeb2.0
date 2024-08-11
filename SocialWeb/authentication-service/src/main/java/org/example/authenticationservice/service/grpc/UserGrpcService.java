@@ -22,10 +22,10 @@ public class UserGrpcService {
         return userServiceBlockingStub.getUserDetails(request);
     }
 
-    public UserDatabaseService.GetEmailUniqueResponse getEmailUniqueRequest(String email) {
-        UserDatabaseService.GetEmailUniqueRequest request = UserDatabaseService.GetEmailUniqueRequest
+    public UserDatabaseService.BooleanResponse getEmailUniqueRequest(String email) {
+        UserDatabaseService.StringRequest request = UserDatabaseService.StringRequest
                 .newBuilder()
-                .setEmail(email)
+                .setString(email)
                 .build();
         return userServiceBlockingStub.getEmailUnique(request);
     }

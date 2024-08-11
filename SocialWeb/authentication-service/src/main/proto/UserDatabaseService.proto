@@ -15,12 +15,8 @@ message DetailsResponse {
   repeated string roles = 2;
 }
 
-message GetEmailUniqueRequest{
-  string email = 1;
-}
-
-message GetEmailUniqueResponse{
-  bool result = 1;
+message BooleanResponse{
+  bool boolean = 1;
 }
 
 message RegisterUserRequest{
@@ -50,7 +46,7 @@ message GetProfileInformationResponse {
 
 service UserService{
   rpc getUserDetails (StringRequest) returns (DetailsResponse);
-  rpc getEmailUnique (GetEmailUniqueRequest) returns (GetEmailUniqueResponse);
+  rpc getEmailUnique (StringRequest) returns (BooleanResponse);
   rpc registerUser (RegisterUserRequest) returns (RegisterUserResponse);
   rpc getProfileInformationByEmail (StringRequest) returns (GetProfileInformationResponse);
   rpc getProfileInformationById (LongRequest) returns (GetProfileInformationResponse);
