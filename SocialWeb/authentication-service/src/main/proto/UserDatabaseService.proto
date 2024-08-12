@@ -49,6 +49,11 @@ message LongStringRequest{
   string string = 2;
 }
 
+message LongIntegerRequest{
+  int64 long = 1;
+  int32 integer = 2;
+}
+
 service UserService{
   rpc getUserDetails (StringRequest) returns (DetailsResponse);
   rpc getEmailUnique (StringRequest) returns (BooleanResponse);
@@ -56,4 +61,10 @@ service UserService{
   rpc getProfileInformationByEmail (StringRequest) returns (GetProfileInformationResponse);
   rpc getProfileInformationById (LongRequest) returns (GetProfileInformationResponse);
   rpc changeName(LongStringRequest) returns (BooleanResponse);
+  rpc changeSurname(LongStringRequest) returns (BooleanResponse);
+  rpc changeAge(LongIntegerRequest) returns (BooleanResponse);
+  rpc changeStatus(LongStringRequest) returns (BooleanResponse);
+  rpc changeCity(LongStringRequest) returns (BooleanResponse);
+  rpc changeEmail(LongStringRequest) returns (BooleanResponse);
+  rpc changePassword(LongStringRequest) returns (BooleanResponse);
 }

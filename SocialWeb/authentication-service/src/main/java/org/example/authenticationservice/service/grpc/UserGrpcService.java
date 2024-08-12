@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.example.authenticationservice.enumeration.role.user.UserRole;
 import org.example.authenticationservice.model.request.RegisterRequestModel;
+import org.example.authenticationservice.util.builder.UserDatabaseServiceBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,19 +16,11 @@ public class UserGrpcService {
     private UserServiceGrpc.UserServiceBlockingStub userServiceBlockingStub;
 
     public UserDatabaseService.DetailsResponse getDetailsRequest(String email) {
-        UserDatabaseService.StringRequest request = UserDatabaseService.StringRequest
-                .newBuilder()
-                .setString(email)
-                .build();
-        return userServiceBlockingStub.getUserDetails(request);
+        return userServiceBlockingStub.getUserDetails(UserDatabaseServiceBuilder.build(email));
     }
 
     public UserDatabaseService.BooleanResponse getEmailUniqueRequest(String email) {
-        UserDatabaseService.StringRequest request = UserDatabaseService.StringRequest
-                .newBuilder()
-                .setString(email)
-                .build();
-        return userServiceBlockingStub.getEmailUnique(request);
+        return userServiceBlockingStub.getEmailUnique(UserDatabaseServiceBuilder.build(email));
     }
 
     public UserDatabaseService.LongResponse registerUser(RegisterRequestModel requestModel) {
@@ -45,27 +38,38 @@ public class UserGrpcService {
     }
 
     public UserDatabaseService.GetProfileInformationResponse getProfileInformation(String email) {
-        UserDatabaseService.StringRequest request = UserDatabaseService.StringRequest
-                .newBuilder()
-                .setString(email)
-                .build();
-        return userServiceBlockingStub.getProfileInformationByEmail(request);
+        return userServiceBlockingStub.getProfileInformationByEmail(UserDatabaseServiceBuilder.build(email));
     }
 
     public UserDatabaseService.GetProfileInformationResponse getProfileInformation(Long id) {
-        UserDatabaseService.LongRequest request = UserDatabaseService.LongRequest
-                .newBuilder()
-                .setLong(id)
-                .build();
-        return userServiceBlockingStub.getProfileInformationById(request);
+        return userServiceBlockingStub.getProfileInformationById(UserDatabaseServiceBuilder.build(id));
     }
 
-    public Boolean changeName(Long userId, String newName){
-        UserDatabaseService.LongStringRequest request = UserDatabaseService.LongStringRequest
-                .newBuilder()
-                .setLong(userId)
-                .setString(newName)
-                .build();
-        return userServiceBlockingStub.changeName(request).getBoolean();
+    public Boolean changeName(Long id, String name) {
+        return userServiceBlockingStub.changeName(UserDatabaseServiceBuilder.build(id, name)).getBoolean();
+    }
+
+    public Boolean changeSurname(Long id, String surname) {
+        return userServiceBlockingStub.changeSurname(UserDatabaseServiceBuilder.build(id, surname)).getBoolean();
+    }
+
+    public Boolean changeAge(Long id, Integer age) {
+        return userServiceBlockingStub.changeAge(UserDatabaseServiceBuilder.build(id, age)).getBoolean();
+    }
+
+    public Boolean changeStatus(Long id, String status) {
+        return userServiceBlockingStub.changeStatus(UserDatabaseServiceBuilder.build(id, status)).getBoolean();
+    }
+
+    public Boolean changeCity(Long id, String city) {
+        return userServiceBlockingStub.changeCity(UserDatabaseServiceBuilder.build(id, city)).getBoolean();
+    }
+
+    public Boolean changeEmail(Long id, String email) {
+        return userServiceBlockingStub.changeEmail(UserDatabaseServiceBuilder.build(id, email)).getBoolean();
+    }
+
+    public Boolean changePassword(Long id, String password) {
+        return userServiceBlockingStub.changePassword(UserDatabaseServiceBuilder.build(id, password)).getBoolean();
     }
 }

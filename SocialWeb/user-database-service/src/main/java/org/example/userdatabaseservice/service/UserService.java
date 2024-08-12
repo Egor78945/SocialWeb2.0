@@ -44,4 +44,34 @@ public class UserService {
     public void changeUserNameById(Long id, String name){
         userRepository.updateUserNameById(id, name);
     }
+
+    @Transactional
+    public void changeUserSurnameById(Long id, String surname){
+        userRepository.updateUserSurnameById(id, surname);
+    }
+
+    @Transactional
+    public void changeUserAgeById(Long id, Integer age){
+        userRepository.updateUserAgeById(id, age);
+    }
+
+    @Transactional
+    public void changeUserStatus(Long id, String status){
+        userRepository.updateUserStatusById(id, status);
+    }
+
+    @Transactional
+    public void changeUserCityById(Long id, String city){
+        userRepository.updateUserCityById(id, city);
+    }
+
+    @Transactional
+    public void changeUserEmailById(Long id, String email){
+        userRepository.updateUserEmailById(id, email);
+    }
+
+    @Transactional
+    public void changeUserPasswordById(Long id, String password){
+        userRepository.updateUserPasswordById(id, password);
+    }
 }

@@ -8,6 +8,7 @@ import net.devh.boot.grpc.server.service.GrpcService;
 import org.example.userdatabaseservice.model.UserProfileRequestModel;
 import org.example.userdatabaseservice.service.RoleService;
 import org.example.userdatabaseservice.service.UserService;
+import org.example.userdatabaseservice.util.builder.UserDatabaseServiceBuilder;
 import org.example.userdatabaseservice.util.converter.UserConverter;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,11 +31,7 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
     public void getEmailUnique(UserDatabaseService.StringRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
-        UserDatabaseService.BooleanResponse response = UserDatabaseService.BooleanResponse
-                .newBuilder()
-                .setBoolean(!userService.getUserExists(request.getString()))
-                .build();
-        responseObserver.onNext(response);
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(!userService.getUserExists(request.getString())));
         responseObserver.onCompleted();
     }
 
@@ -43,11 +40,7 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     public void registerUser(UserDatabaseService.RegisterUserRequest request, StreamObserver<UserDatabaseService.LongResponse> responseObserver) {
         Long savedUserId = userService.registerUser(UserConverter.convertTo(request));
         roleService.saveRole(savedUserId, request.getRoleList());
-        UserDatabaseService.LongResponse response = UserDatabaseService.LongResponse
-                .newBuilder()
-                .setLong(savedUserId)
-                .build();
-        responseObserver.onNext(response);
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(savedUserId));
         responseObserver.onCompleted();
     }
 
@@ -69,11 +62,49 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     @Override
     public void changeName(UserDatabaseService.LongStringRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
         userService.changeUserNameById(request.getLong(), request.getString());
-        UserDatabaseService.BooleanResponse response = UserDatabaseService.BooleanResponse
-                .newBuilder()
-                .setBoolean(true)
-                .build();
-        responseObserver.onNext(response);
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(true));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void changeSurname(UserDatabaseService.LongStringRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
+        userService.changeUserSurnameById(request.getLong(), request.getString());
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(true));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void changeAge(UserDatabaseService.LongIntegerRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
+        userService.changeUserAgeById(request.getLong(), request.getInteger());
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(true));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void changeStatus(UserDatabaseService.LongStringRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
+        userService.changeUserStatus(request.getLong(), request.getString());
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(true));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void changeCity(UserDatabaseService.LongStringRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
+        userService.changeUserCityById(request.getLong(), request.getString());
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(true));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void changeEmail(UserDatabaseService.LongStringRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
+        userService.changeUserEmailById(request.getLong(), request.getString());
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(true));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void changePassword(UserDatabaseService.LongStringRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
+        userService.changeUserPasswordById(request.getLong(), request.getString());
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(true));
         responseObserver.onCompleted();
     }
 }
