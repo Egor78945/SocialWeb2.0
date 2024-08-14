@@ -35,7 +35,7 @@ public class AuthenticationService {
     }
 
     public Long register(RegisterRequestModel requestModel) {
-        if (UserValidator.isValid(requestModel) && userGrpcService.getEmailUniqueRequest(requestModel.getEmail()).getBoolean()) {
+        if (UserValidator.isValidRegisterModel.test(requestModel) && userGrpcService.getEmailUniqueRequest(requestModel.getEmail()).getBoolean()) {
             requestModel.setPassword(passwordEncoder.encode(requestModel.getPassword()));
             return userGrpcService.registerUser(requestModel).getLong();
         } else throw new IllegalArgumentException("Illegal registration data format or email is busy.");

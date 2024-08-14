@@ -2,6 +2,7 @@ package org.example.authenticationservice.service.grpc;
 
 import com.example.grpc.UserDatabaseService;
 import com.example.grpc.UserServiceGrpc;
+import io.grpc.StatusRuntimeException;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.example.authenticationservice.enumeration.role.user.UserRole;
