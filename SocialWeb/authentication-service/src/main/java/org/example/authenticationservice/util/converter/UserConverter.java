@@ -1,8 +1,6 @@
 package org.example.authenticationservice.util.converter;
 
-import com.example.grpc.UserDatabaseService;
 import org.example.authenticationservice.enumeration.role.user.UserRole;
-import org.example.authenticationservice.model.response.UserProfile;
 
 import java.util.List;
 import java.util.Map;
