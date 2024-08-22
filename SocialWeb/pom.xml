@@ -19,6 +19,7 @@
         <module>api-gateway</module>
         <module>authentication-service</module>
         <module>user-database-service</module>
+        <module>friendship-service</module>
     </modules>
 
     <dependencies>

@@ -4,7 +4,7 @@ spring:
 
    datasource:
      driver-class-name: org.postgresql.Driver
-     url: jdbc:postgresql://postgres:5432/friendship
+     url: jdbc:postgresql://postgres:5432/social_web
      username: bestuser
      password: bestuser
 
@@ -31,4 +31,4 @@ server:
 
 grpc:
   server:
-    port: 9090
+    port: 9091
