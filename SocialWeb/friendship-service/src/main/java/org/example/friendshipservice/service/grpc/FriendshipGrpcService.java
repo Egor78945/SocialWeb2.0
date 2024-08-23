@@ -1,7 +1,7 @@
 package org.example.friendshipservice.service.grpc;
 
-import com.example.grpc.FriendshipDatabaseService;
-import com.example.grpc.FriendshipServiceGrpc;
+import com.example.grpc.friendship.FriendshipDatabaseService;
+import com.example.grpc.friendship.FriendshipServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;

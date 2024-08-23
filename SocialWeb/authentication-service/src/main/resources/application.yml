@@ -24,6 +24,9 @@ grpc:
     user-grpc-service:
       address: 'discovery:///user-database-service'
       negotiation-type: plaintext
+    friendship-grpc-service:
+      address: 'discovery:///friendship-database-service'
+      negotiation-type: plaintext
 
 
 server:

@@ -1,6 +1,6 @@
 package org.example.authenticationservice.util.builder;
 
-import com.example.grpc.UserDatabaseService;
+import com.example.grpc.user.UserDatabaseService;
 
 public class UserDatabaseServiceBuilder {
     public static UserDatabaseService.LongStringRequest build(Long longValue, String stringValue) {

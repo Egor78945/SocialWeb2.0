@@ -1,6 +1,6 @@
 package org.example.friendshipservice.service.util;
 
-import com.example.grpc.FriendshipDatabaseService;
+import com.example.grpc.friendship.FriendshipDatabaseService;
 
 import java.util.List;
 

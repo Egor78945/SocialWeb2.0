@@ -1,6 +1,6 @@
 package org.example.authenticationservice.service;
 
-import com.example.grpc.UserDatabaseService;
+import com.example.grpc.user.UserDatabaseService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.RequiredArgsConstructor;

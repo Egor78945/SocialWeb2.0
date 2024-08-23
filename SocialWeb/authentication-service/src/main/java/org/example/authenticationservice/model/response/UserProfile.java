@@ -1,6 +1,6 @@
 package org.example.authenticationservice.model.response;
 
-import com.example.grpc.UserDatabaseService;
+import com.example.grpc.user.UserDatabaseService;
 import lombok.Data;
 
 @Data
