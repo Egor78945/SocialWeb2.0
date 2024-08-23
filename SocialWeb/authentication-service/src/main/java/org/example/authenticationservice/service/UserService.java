@@ -94,13 +94,13 @@ public class UserService implements UserDetailsService {
     }
 
     public void changeEmail(String email) throws JsonProcessingException {
-        if(UserValidator.isValidEmail.test(email) && userGrpcService.getEmailUniqueRequest(email).getBoolean()){
+        if(UserValidator.checkEmail(email) && userGrpcService.getEmailUniqueRequest(email).getBoolean()){
             userGrpcService.changeEmail(getUserProfile().getId(), email);
         } else throw new IllegalArgumentException("Illegal email format or email is busy.");
     }
 
     public void changePassword(String password) throws JsonProcessingException {
-        if(UserValidator.isValidPassword.test(password)){
+        if(UserValidator.checkPassword(password)){
             userGrpcService.changePassword(getUserProfile().getId(), passwordEncoder.encode(password));
         } else throw new IllegalArgumentException("Illegal password format.");
     }
