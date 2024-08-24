@@ -25,7 +25,7 @@ grpc:
       address: 'discovery:///user-database-service'
       negotiation-type: plaintext
     friendship-grpc-service:
-      address: 'discovery:///friendship-database-service'
+      address: 'discovery:///friendship-service'
       negotiation-type: plaintext
 
 

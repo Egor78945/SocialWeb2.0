@@ -1,6 +1,6 @@
 package org.example.userdatabaseservice.util.builder;
 
-import com.example.grpc.UserDatabaseService;
+import com.example.grpc.user.UserDatabaseService;
 
 public class UserDatabaseServiceBuilder {
     public static UserDatabaseService.BooleanResponse build(Boolean result) {

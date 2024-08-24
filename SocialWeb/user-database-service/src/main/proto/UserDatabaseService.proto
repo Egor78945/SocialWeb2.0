@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package com.example.grpc;
+package com.example.grpc.user;
 
 message StringRequest {
   string string = 1;

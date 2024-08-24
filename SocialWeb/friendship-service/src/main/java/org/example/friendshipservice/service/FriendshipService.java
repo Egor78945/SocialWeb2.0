@@ -26,7 +26,7 @@ public class FriendshipService {
 
     @Transactional
     public boolean acceptFriendshipRequest(Long userId, Long friendId) {
-        boolean exists = friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(userId, friendId, false) && friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(friendId, userId, false);
+        boolean exists = friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(userId, friendId, false) || friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(friendId, userId, false);
         if (exists)
             friendshipRepository.updateFriendshipStatus(userId, friendId, true);
         else
@@ -36,7 +36,7 @@ public class FriendshipService {
 
     @Transactional
     public boolean rejectFriendRequest(Long userId, Long friendId) {
-        boolean exists = friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(userId, friendId, false) && friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(friendId, userId, false);
+        boolean exists = friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(userId, friendId, false) || friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(friendId, userId, false);
         if (exists)
             friendshipRepository.deleteFriendshipByUserIdAndFriendIdAndStatus(userId, friendId, false);
         else
@@ -46,7 +46,7 @@ public class FriendshipService {
 
     @Transactional
     public boolean discardFriendship(Long userId, Long friendId) {
-        boolean exists = friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(userId, friendId, true) && friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(friendId, userId, true);
+        boolean exists = friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(userId, friendId, true) || friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(friendId, userId, true);
         if (exists)
             friendshipRepository.deleteFriendshipByUserIdAndFriendIdAndStatus(userId, friendId, true);
         else
@@ -56,7 +56,7 @@ public class FriendshipService {
 
     @Transactional
     public List<Long> getAllFriends(Long userId) {
-        boolean exists = friendshipRepository.existsFriendshipByUserIdAndStatus(userId, true) && friendshipRepository.existsFriendshipByUserIdAndStatus(userId, true);
+        boolean exists = friendshipRepository.existsFriendshipByUserIdAndStatus(userId, true) || friendshipRepository.existsFriendshipByUserIdAndStatus(userId, true);
         if (exists)
             return friendshipRepository.findAllByUserId(userId, true);
         else
@@ -65,7 +65,7 @@ public class FriendshipService {
 
     @Transactional
     public List<Long> getAllFriendshipRequests(Long userId) {
-        boolean exists = friendshipRepository.existsFriendshipByUserIdAndStatus(userId, false) && friendshipRepository.existsFriendshipByUserIdAndStatus(userId, false);
+        boolean exists = friendshipRepository.existsFriendshipByUserIdAndStatus(userId, false) || friendshipRepository.existsFriendshipByUserIdAndStatus(userId, false);
         if (exists)
             return friendshipRepository.findAllByUserId(userId, false);
         else

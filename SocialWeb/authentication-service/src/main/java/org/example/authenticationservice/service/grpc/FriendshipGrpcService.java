@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class FriendshipGrpcService {
-    @GrpcClient("friendship-database-service")
+    @GrpcClient("friendship-grpc-service")
     private FriendshipServiceGrpc.FriendshipServiceBlockingStub blockingStub;
 
     public FriendshipDatabaseService.BooleanResponse friendshipRequest(Long userId, Long friendId) {

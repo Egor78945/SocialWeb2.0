@@ -1,7 +1,7 @@
 package org.example.userdatabaseservice.service.grpc;
 
-import com.example.grpc.UserDatabaseService;
-import com.example.grpc.UserServiceGrpc;
+import com.example.grpc.user.UserDatabaseService;
+import com.example.grpc.user.UserServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;

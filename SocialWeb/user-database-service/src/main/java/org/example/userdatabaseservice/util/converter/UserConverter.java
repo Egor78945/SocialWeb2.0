@@ -1,6 +1,6 @@
 package org.example.userdatabaseservice.util.converter;
 
-import com.example.grpc.UserDatabaseService;
+import com.example.grpc.user.UserDatabaseService;
 import org.example.userdatabaseservice.model.UserProfileRequestModel;
 import org.example.userdatabaseservice.model.entity.User;
 
