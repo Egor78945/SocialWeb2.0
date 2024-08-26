@@ -2,12 +2,12 @@ package org.example.authenticationservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import org.example.authenticationservice.model.response.UserProfile;
 import org.example.authenticationservice.service.FriendshipService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/friend")
@@ -37,5 +37,15 @@ public class FriendshipController {
     public ResponseEntity<String> discardFriendship(@PathVariable("id") Long id) throws JsonProcessingException {
         friendshipService.discardFriendshipRequest(id);
         return ResponseEntity.ok("The user is not longer your friend.");
+    }
+
+    @GetMapping("/request")
+    public ResponseEntity<List<UserProfile>> getAllFriendshipRequests() throws JsonProcessingException {
+        return ResponseEntity.ok(friendshipService.getAllFriendshipRequests());
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserProfile>> getAllFriends() throws JsonProcessingException {
+        return ResponseEntity.ok(friendshipService.getAllFriends());
     }
 }

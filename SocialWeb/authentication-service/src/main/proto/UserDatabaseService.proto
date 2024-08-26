@@ -44,6 +44,10 @@ message GetProfileInformationResponse {
   string status = 8;
 }
 
+message ListGetProfileInformationResponse {
+  repeated GetProfileInformationResponse responseList = 1;
+}
+
 message LongStringRequest{
   int64 long = 1;
   string string = 2;
@@ -52,6 +56,10 @@ message LongStringRequest{
 message LongIntegerRequest{
   int64 long = 1;
   int32 integer = 2;
+}
+
+message LongListRequest{
+  repeated int64 longs = 1;
 }
 
 service UserService{
@@ -67,4 +75,5 @@ service UserService{
   rpc changeCity(LongStringRequest) returns (BooleanResponse);
   rpc changeEmail(LongStringRequest) returns (BooleanResponse);
   rpc changePassword(LongStringRequest) returns (BooleanResponse);
+  rpc getProfileInformationByListId(LongListRequest) returns (ListGetProfileInformationResponse);
 }

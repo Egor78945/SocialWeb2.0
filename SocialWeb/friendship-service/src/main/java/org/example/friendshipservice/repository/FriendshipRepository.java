@@ -25,7 +25,7 @@ public interface FriendshipRepository extends JpaRepository<Friendship, Long> {
     @Transactional
     void updateFriendshipStatus(Long userId, Long friendId, Boolean status);
 
-    @Query("DELETE FROM Friendship WHERE (userId=?1 AND friendId=?2 OR userId=?2 AND userId=?1) AND status=?3")
+    @Query("DELETE FROM Friendship WHERE (userId=?1 AND friendId=?2 OR userId=?2 AND friendId=?1) AND status=?3")
     @Modifying
     @Transactional
     void deleteFriendshipByUserIdAndFriendIdAndStatus(Long userId, Long friendId, Boolean status);

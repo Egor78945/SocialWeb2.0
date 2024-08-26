@@ -9,6 +9,8 @@ import org.example.authenticationservice.model.request.RegisterRequestModel;
 import org.example.authenticationservice.util.builder.UserDatabaseServiceBuilder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserGrpcService {
@@ -71,5 +73,9 @@ public class UserGrpcService {
 
     public Boolean changePassword(Long id, String password) {
         return userServiceBlockingStub.changePassword(UserDatabaseServiceBuilder.build(id, password)).getBoolean();
+    }
+
+    public UserDatabaseService.ListGetProfileInformationResponse getProfileInformationListByListId(List<Long> idList){
+        return userServiceBlockingStub.getProfileInformationByListId(UserDatabaseServiceBuilder.build(idList));
     }
 }

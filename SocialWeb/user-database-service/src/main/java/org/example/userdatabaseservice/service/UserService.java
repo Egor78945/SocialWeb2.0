@@ -7,6 +7,8 @@ import org.example.userdatabaseservice.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -35,43 +37,52 @@ public class UserService {
     public UserProfileRequestModel getUserProfileInformation(String email) {
         return userRepository.findUserProfileInformationByEmail(email);
     }
+
     @Transactional
     public UserProfileRequestModel getUserProfileInformation(Long id) {
         return userRepository.findUserProfileInformationById(id);
     }
 
     @Transactional
-    public void changeUserNameById(Long id, String name){
+    public void changeUserNameById(Long id, String name) {
         userRepository.updateUserNameById(id, name);
     }
 
     @Transactional
-    public void changeUserSurnameById(Long id, String surname){
+    public void changeUserSurnameById(Long id, String surname) {
         userRepository.updateUserSurnameById(id, surname);
     }
 
     @Transactional
-    public void changeUserAgeById(Long id, Integer age){
+    public void changeUserAgeById(Long id, Integer age) {
         userRepository.updateUserAgeById(id, age);
     }
 
     @Transactional
-    public void changeUserStatus(Long id, String status){
+    public void changeUserStatus(Long id, String status) {
         userRepository.updateUserStatusById(id, status);
     }
 
     @Transactional
-    public void changeUserCityById(Long id, String city){
+    public void changeUserCityById(Long id, String city) {
         userRepository.updateUserCityById(id, city);
     }
 
     @Transactional
-    public void changeUserEmailById(Long id, String email){
+    public void changeUserEmailById(Long id, String email) {
         userRepository.updateUserEmailById(id, email);
     }
 
     @Transactional
-    public void changeUserPasswordById(Long id, String password){
+    public void changeUserPasswordById(Long id, String password) {
         userRepository.updateUserPasswordById(id, password);
+    }
+
+    @Transactional
+    public List<UserProfileRequestModel> getUserProfileInformation(List<Long> idList) {
+        return idList
+                .stream()
+                .map(id -> getUserProfileInformation(id))
+                .toList();
     }
 }

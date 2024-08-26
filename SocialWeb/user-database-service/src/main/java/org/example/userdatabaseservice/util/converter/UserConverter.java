@@ -4,6 +4,8 @@ import com.example.grpc.user.UserDatabaseService;
 import org.example.userdatabaseservice.model.UserProfileRequestModel;
 import org.example.userdatabaseservice.model.entity.User;
 
+import java.util.List;
+
 public class UserConverter {
     public static User convertTo(UserDatabaseService.RegisterUserRequest request) {
         return User.newBuilder()
@@ -19,7 +21,7 @@ public class UserConverter {
                 .build();
     }
 
-    public static UserDatabaseService.GetProfileInformationResponse convertTo(UserProfileRequestModel requestModel){
+    public static UserDatabaseService.GetProfileInformationResponse convertTo(UserProfileRequestModel requestModel) {
         return UserDatabaseService.GetProfileInformationResponse
                 .newBuilder()
                 .setId(requestModel.getId())
@@ -31,5 +33,12 @@ public class UserConverter {
                 .setRegisterDate(requestModel.getRegisterDate().toString())
                 .setStatus(requestModel.getStatus())
                 .build();
+    }
+
+    public static List<UserDatabaseService.GetProfileInformationResponse> convertTo(List<UserProfileRequestModel> requestModel) {
+        return requestModel
+                .stream()
+                .map(r -> convertTo(r))
+                .toList();
     }
 }

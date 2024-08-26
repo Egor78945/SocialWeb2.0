@@ -51,6 +51,7 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
+
     @Override
     public void getProfileInformationById(UserDatabaseService.LongRequest request, StreamObserver<UserDatabaseService.GetProfileInformationResponse> responseObserver) {
         UserProfileRequestModel requestModel = userService.getUserProfileInformation(request.getLong());
@@ -105,6 +106,16 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
     public void changePassword(UserDatabaseService.LongStringRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
         userService.changeUserPasswordById(request.getLong(), request.getString());
         responseObserver.onNext(UserDatabaseServiceBuilder.build(true));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getProfileInformationByListId(UserDatabaseService.LongListRequest request, StreamObserver<UserDatabaseService.ListGetProfileInformationResponse> responseObserver) {
+        UserDatabaseService.ListGetProfileInformationResponse response = UserDatabaseService.ListGetProfileInformationResponse
+                .newBuilder()
+                .addAllResponseList(UserConverter.convertTo(userService.getUserProfileInformation(request.getLongsList())))
+                .build();
+        responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 }

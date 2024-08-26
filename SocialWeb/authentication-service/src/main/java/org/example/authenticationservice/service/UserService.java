@@ -28,7 +28,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDatabaseService.DetailsResponse response = userGrpcService.getDetailsRequest(username);
-        return new UserDetailsImplementation(username, response.getPassword(), UserConverter.convertTo(response.getRolesList()));
+        return new UserDetailsImplementation(username, response.getPassword(), UserConverter.convertStringToUserRole(response.getRolesList()));
     }
 
     public UserProfile getUserProfile(String email) {
