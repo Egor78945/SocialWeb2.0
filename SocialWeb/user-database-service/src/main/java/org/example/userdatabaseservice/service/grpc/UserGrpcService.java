@@ -12,6 +12,8 @@ import org.example.userdatabaseservice.util.builder.UserDatabaseServiceBuilder;
 import org.example.userdatabaseservice.util.converter.UserConverter;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @GrpcService
 @RequiredArgsConstructor
 public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
@@ -111,11 +113,23 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
     public void getProfileInformationByListId(UserDatabaseService.LongListRequest request, StreamObserver<UserDatabaseService.ListGetProfileInformationResponse> responseObserver) {
-        UserDatabaseService.ListGetProfileInformationResponse response = UserDatabaseService.ListGetProfileInformationResponse
-                .newBuilder()
-                .addAllResponseList(UserConverter.convertTo(userService.getUserProfileInformation(request.getLongsList())))
-                .build();
-        responseObserver.onNext(response);
+        List<UserDatabaseService.GetProfileInformationResponse> responseList = UserConverter.convertTo(userService.getUserProfileInformation(request.getLongsList()));
+        UserDatabaseService.ListGetProfileInformationResponse listGetProfileInformationResponse = UserDatabaseServiceBuilder.build(responseList);
+        responseObserver.onNext(listGetProfileInformationResponse);
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void incrementFriendCount(UserDatabaseService.LongRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
+        userService.incrementUserFriendCountById(request.getLong());
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(true));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void decrementFriendCount(UserDatabaseService.LongRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
+        userService.decrementUserFriendCountById(request.getLong());
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(true));
         responseObserver.onCompleted();
     }
 }

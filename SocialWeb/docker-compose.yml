@@ -37,12 +37,14 @@ services:
   user-database-service:
     container_name: user-database-service
     build: /user-database-service/.
+    restart: always
     depends_on:
       - authentication-service
 
   friendship-service:
     container_name: friendship-service
     build: /friendship-service/.
+    restart: always
     depends_on:
       - authentication-service
 

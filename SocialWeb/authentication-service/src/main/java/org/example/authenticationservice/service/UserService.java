@@ -46,9 +46,7 @@ public class UserService implements UserDetailsService {
     public void changeName(String name) throws JsonProcessingException {
         if (!name.isEmpty() && !name.isBlank() && name.length() <= 30) {
             if (userGrpcService.changeName(getUserProfile().getId(), name)) {
-                UserProfile userProfile = getUserProfile();
-                userProfile.setName(name);
-                redisService.saveObject(RedisKey.CURRENT_KEY.name(), userProfile);
+                reloadUserToRedis();
             }
         } else throw new IllegalArgumentException("Illegal name format.");
     }
@@ -56,9 +54,7 @@ public class UserService implements UserDetailsService {
     public void changeSurname(String surname) throws JsonProcessingException {
         if (!surname.isEmpty() && !surname.isBlank() && surname.length() <= 50) {
             if (userGrpcService.changeSurname(getUserProfile().getId(), surname)) {
-                UserProfile userProfile = getUserProfile();
-                userProfile.setSurname(surname);
-                redisService.saveObject(RedisKey.CURRENT_KEY.name(), userProfile);
+                reloadUserToRedis();
             }
         } else throw new IllegalArgumentException("Illegal surname format.");
     }
@@ -66,42 +62,52 @@ public class UserService implements UserDetailsService {
     public void changeAge(Integer age) throws JsonProcessingException {
         if (age >= 14 && age <= 111) {
             if (userGrpcService.changeAge(getUserProfile().getId(), age)) {
-                UserProfile userProfile = getUserProfile();
-                userProfile.setAge(age);
-                redisService.saveObject(RedisKey.CURRENT_KEY.name(), userProfile);
+                reloadUserToRedis();
             }
         } else throw new IllegalArgumentException("Age is too low or high.");
     }
 
     public void changeStatus(String status) throws JsonProcessingException {
-        if(!status.isEmpty() && !status.isBlank() && status.length() <= 100){
-            if(userGrpcService.changeStatus(getUserProfile().getId(), status)){
-                UserProfile userProfile = getUserProfile();
-                userProfile.setStatus(status);
-                redisService.saveObject(RedisKey.CURRENT_KEY.name(), userProfile);
+        if (!status.isEmpty() && !status.isBlank() && status.length() <= 100) {
+            if (userGrpcService.changeStatus(getUserProfile().getId(), status)) {
+                reloadUserToRedis();
             }
         } else throw new IllegalArgumentException("Status is empty or too long.");
     }
 
     public void changeCity(String city) throws JsonProcessingException {
-        if(!city.isEmpty() && !city.isBlank() && city.length() <= 50){
-            if(userGrpcService.changeCity(getUserProfile().getId(), city)){
-                UserProfile userProfile = getUserProfile();
-                userProfile.setCity(city);
-                redisService.saveObject(RedisKey.CURRENT_KEY.name(), userProfile);
+        if (!city.isEmpty() && !city.isBlank() && city.length() <= 50) {
+            if (userGrpcService.changeCity(getUserProfile().getId(), city)) {
+                reloadUserToRedis();
             }
         } else throw new IllegalArgumentException("City is empty or too long.");
     }
 
     public void changeEmail(String email) throws JsonProcessingException {
-        if(UserValidator.checkEmail(email) && userGrpcService.getEmailUniqueRequest(email).getBoolean()){
+        if (UserValidator.checkEmail(email) && userGrpcService.getEmailUniqueRequest(email).getBoolean()) {
             userGrpcService.changeEmail(getUserProfile().getId(), email);
         } else throw new IllegalArgumentException("Illegal email format or email is busy.");
     }
 
     public void changePassword(String password) throws JsonProcessingException {
-        if(UserValidator.checkPassword(password)){
+        if (UserValidator.checkPassword(password)) {
             userGrpcService.changePassword(getUserProfile().getId(), passwordEncoder.encode(password));
         } else throw new IllegalArgumentException("Illegal password format.");
+    }
+
+    public boolean incrementFriendCount(Long userId) throws JsonProcessingException {
+        boolean result = userGrpcService.incrementFriendCount(userId);
+        reloadUserToRedis();
+        return result;
+    }
+
+    public boolean decrementFriendCount(Long userId) throws JsonProcessingException {
+        boolean result = userGrpcService.decrementFriendCount(userId);
+        reloadUserToRedis();
+        return result;
+    }
+
+    public void reloadUserToRedis() throws JsonProcessingException {
+        redisService.saveObject(RedisKey.CURRENT_KEY.name(), getUserProfile(getUserProfile().getId()));
     }
 }

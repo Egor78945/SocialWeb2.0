@@ -32,5 +32,5 @@ public interface FriendshipRepository extends JpaRepository<Friendship, Long> {
 
     @Query("SELECT friendId FROM Friendship WHERE userId=?1 AND status=?2 UNION SELECT userId FROM Friendship WHERE friendId=?1 AND status=?2")
     @Transactional
-    List<Long> findAllByUserId(Long id, Boolean status);
+    List<Long> findAllByUserIdAndStatus(Long id, Boolean status);
 }

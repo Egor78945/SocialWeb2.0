@@ -52,4 +52,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("update User u set u.password=?2 where u.id=?1")
     @Modifying
     void updateUserPasswordById(Long id, String password);
+
+    @Query("update User u set u.friendCount=u.friendCount+1 where u.id=?1")
+    @Modifying
+    void incrementUserFriendCountById(Long id);
+
+    @Query("update User u set u.friendCount=u.friendCount-1 where u.id=?1")
+    @Modifying
+    void decrementUserFriendCountById(Long id);
+
+    @Query("select u.friendCount from User u where u.id=?1")
+    Integer getUserFriendCountById(Long id);
 }

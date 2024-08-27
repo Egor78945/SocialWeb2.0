@@ -1,7 +1,6 @@
 package org.example.friendshipservice.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.friendshipservice.exception.RequestRejectedException;
 import org.example.friendshipservice.model.entity.Friendship;
 import org.example.friendshipservice.repository.FriendshipRepository;
 import org.springframework.stereotype.Service;
@@ -40,12 +39,12 @@ public class FriendshipService {
 
     @Transactional
     public List<Long> getAllFriends(Long userId) {
-        return friendshipRepository.findAllByUserId(userId, true);
+        return friendshipRepository.findAllByUserIdAndStatus(userId, true);
     }
 
     @Transactional
     public List<Long> getAllFriendshipRequests(Long userId) {
-        return friendshipRepository.findAllByUserId(userId, false);
+        return friendshipRepository.findAllByUserIdAndStatus(userId, false);
     }
 
     @Transactional

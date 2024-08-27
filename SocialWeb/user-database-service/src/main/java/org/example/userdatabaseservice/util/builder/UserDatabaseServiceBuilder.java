@@ -2,6 +2,8 @@ package org.example.userdatabaseservice.util.builder;
 
 import com.example.grpc.user.UserDatabaseService;
 
+import java.util.List;
+
 public class UserDatabaseServiceBuilder {
     public static UserDatabaseService.BooleanResponse build(Boolean result) {
         return UserDatabaseService.BooleanResponse
@@ -14,6 +16,13 @@ public class UserDatabaseServiceBuilder {
         return UserDatabaseService.LongResponse
                 .newBuilder()
                 .setLong(result)
+                .build();
+    }
+
+    public static UserDatabaseService.ListGetProfileInformationResponse build(List<UserDatabaseService.GetProfileInformationResponse> responseList){
+        return UserDatabaseService.ListGetProfileInformationResponse
+                .newBuilder()
+                .addAllResponseList(responseList)
                 .build();
     }
 }

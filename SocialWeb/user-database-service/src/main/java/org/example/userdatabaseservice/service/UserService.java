@@ -85,4 +85,16 @@ public class UserService {
                 .map(id -> getUserProfileInformation(id))
                 .toList();
     }
+
+    @Transactional
+    public void incrementUserFriendCountById(Long userId){
+        userRepository.incrementUserFriendCountById(userId);
+    }
+
+    @Transactional
+    public void decrementUserFriendCountById(Long userId){
+        if(userRepository.getUserFriendCountById(userId) > 0) {
+            userRepository.decrementUserFriendCountById(userId);
+        }
+    }
 }

@@ -78,4 +78,12 @@ public class UserGrpcService {
     public UserDatabaseService.ListGetProfileInformationResponse getProfileInformationListByListId(List<Long> idList){
         return userServiceBlockingStub.getProfileInformationByListId(UserDatabaseServiceBuilder.build(idList));
     }
+
+    public Boolean incrementFriendCount(Long userId){
+        return userServiceBlockingStub.incrementFriendCount(UserDatabaseServiceBuilder.build(userId)).getBoolean();
+    }
+
+    public Boolean decrementFriendCount(Long userId){
+        return userServiceBlockingStub.decrementFriendCount(UserDatabaseServiceBuilder.build(userId)).getBoolean();
+    }
 }

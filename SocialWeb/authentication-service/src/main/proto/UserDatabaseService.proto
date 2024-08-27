@@ -76,4 +76,6 @@ service UserService{
   rpc changeEmail(LongStringRequest) returns (BooleanResponse);
   rpc changePassword(LongStringRequest) returns (BooleanResponse);
   rpc getProfileInformationByListId(LongListRequest) returns (ListGetProfileInformationResponse);
+  rpc incrementFriendCount(LongRequest) returns (BooleanResponse);
+  rpc decrementFriendCount(LongRequest) returns (BooleanResponse);
 }
