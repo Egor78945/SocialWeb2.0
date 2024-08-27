@@ -7,6 +7,17 @@ message LongLongRequest {
   int64 secondLong = 2;
 }
 
+message LongLongBooleanRequest{
+  int64 firstLong = 1;
+  int64 secondLong = 2;
+  bool boolean = 3;
+}
+
+message LongBooleanRequest{
+  int64 firstLong = 1;
+  bool boolean = 2;
+}
+
 message LongRequest {
   int64 firstLong = 1;
 }
@@ -26,4 +37,7 @@ service FriendshipService {
   rpc discardFriendship(LongLongRequest) returns (BooleanResponse);
   rpc getAllFriends(LongRequest) returns (LongListResponse);
   rpc getAllFriendshipRequests(LongRequest) returns (LongListResponse);
+  rpc existsFriendshipByUserIdAndFriendId(LongLongRequest) returns (BooleanResponse);
+  rpc existsFriendshipByUserIdAndFriendIdAndStatus(LongLongBooleanRequest) returns (BooleanResponse);
+  rpc existsFriendshipByUserIdAndStatus(LongBooleanRequest) returns (BooleanResponse);
 }

@@ -48,4 +48,22 @@ public class FriendshipGrpcService extends FriendshipServiceGrpc.FriendshipServi
         responseObserver.onNext(FriendshipDatabaseServiceConverter.convertTo(friendshipService.getAllFriendshipRequests(request.getFirstLong())));
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void existsFriendshipByUserIdAndFriendId(FriendshipDatabaseService.LongLongRequest request, StreamObserver<FriendshipDatabaseService.BooleanResponse> responseObserver) {
+        responseObserver.onNext(FriendshipDatabaseServiceConverter.convertTo(friendshipService.existsFriendshipByUserIdAndFriendId(request.getFirstLong(), request.getSecondLong())));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void existsFriendshipByUserIdAndFriendIdAndStatus(FriendshipDatabaseService.LongLongBooleanRequest request, StreamObserver<FriendshipDatabaseService.BooleanResponse> responseObserver) {
+        responseObserver.onNext(FriendshipDatabaseServiceConverter.convertTo(friendshipService.existsFriendshipByUserIdAndFriendIdAndStatus(request.getFirstLong(), request.getSecondLong(), request.getBoolean())));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void existsFriendshipByUserIdAndStatus(FriendshipDatabaseService.LongBooleanRequest request, StreamObserver<FriendshipDatabaseService.BooleanResponse> responseObserver) {
+        responseObserver.onNext(FriendshipDatabaseServiceConverter.convertTo(friendshipService.existsFriendshipByUserIdAndStatus(request.getFirstLong(), request.getBoolean())));
+        responseObserver.onCompleted();
+    }
 }

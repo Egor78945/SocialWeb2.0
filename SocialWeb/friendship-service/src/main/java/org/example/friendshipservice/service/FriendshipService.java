@@ -71,4 +71,16 @@ public class FriendshipService {
         else
             throw new RequestRejectedException("You haven't friendship requests.");
     }
+
+    public boolean existsFriendshipByUserIdAndFriendId(Long userId, Long friendId){
+        return friendshipRepository.existsFriendshipByUserIdAndFriendId(userId, friendId) || friendshipRepository.existsFriendshipByUserIdAndFriendId(friendId, userId);
+    }
+
+    public boolean existsFriendshipByUserIdAndFriendIdAndStatus(Long userId, Long friendId, boolean status){
+        return friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(userId, friendId, status) || friendshipRepository.existsFriendshipByUserIdAndFriendIdAndStatus(friendId, userId, status);
+    }
+
+    public boolean existsFriendshipByUserIdAndStatus(Long userId, boolean status){
+        return friendshipRepository.existsFriendshipByUserIdAndStatus(userId, status) || friendshipRepository.existsFriendshipByUserIdAndStatus(userId, status);
+    }
 }
