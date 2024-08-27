@@ -37,7 +37,7 @@ public class FriendshipService {
     }
 
     public List<UserProfile> getAllFriendshipRequests() throws JsonProcessingException {
-        List<Long> idList = friendshipGrpcService.getFriendshipRequestsRequest(userService.getUserProfile().getId()).getListList();
+        List<Long> idList = friendshipGrpcService.getFriendshipRequests(userService.getUserProfile().getId()).getListList();
         return UserConverter.convertGetProfileInformationResponseToUserProfile(userGrpcService.getProfileInformationListByListId(idList).getResponseListList());
     }
 

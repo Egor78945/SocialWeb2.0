@@ -33,7 +33,19 @@ public class FriendshipGrpcService {
         return blockingStub.getAllFriends(FriendshipDatabaseServiceBuilder.build(userId));
     }
 
-    public FriendshipDatabaseService.LongListResponse getFriendshipRequestsRequest(Long userId) {
+    public FriendshipDatabaseService.LongListResponse getFriendshipRequests(Long userId) {
         return blockingStub.getAllFriendshipRequests(FriendshipDatabaseServiceBuilder.build(userId));
+    }
+
+    public FriendshipDatabaseService.BooleanResponse existsFriendshipByUserIdAndFriendId(Long userId, Long friendId) {
+        return blockingStub.existsFriendshipByUserIdAndFriendId(FriendshipDatabaseServiceBuilder.build(userId, friendId));
+    }
+
+    public FriendshipDatabaseService.BooleanResponse existsFriendshipByUserIdAndFriendIdAndStatus(Long userId, Long friendId, boolean status) {
+        return blockingStub.existsFriendshipByUserIdAndFriendIdAndStatus(FriendshipDatabaseServiceBuilder.build(userId, friendId, status));
+    }
+
+    public FriendshipDatabaseService.BooleanResponse existsFriendshipByUserIdAndStatus(Long userId, boolean status) {
+        return blockingStub.existsFriendshipByUserIdAndStatus(FriendshipDatabaseServiceBuilder.build(userId, status));
     }
 }
