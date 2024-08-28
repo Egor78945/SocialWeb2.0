@@ -16,7 +16,8 @@ public class UserValidator {
         String[] emailArray = email.split("@");
         return emailArray.length == 2
                 && (emailArray[1].equals("gmail.com") || emailArray[1].equals("mail.ru"))
-                && emailArray[0].length() >= 1
+                && !emailArray[0].isBlank()
+                && !emailArray[0].isEmpty()
                 && emailArray[0].length() <= 100;
     }
 
