@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class UserConverter {
     private static final Map<String, UserRole> map;
+
     static {
         map = Map.of(UserRole.USER_ROLE.name(), UserRole.USER_ROLE,
                 UserRole.ADMIN_ROLE.name(), UserRole.ADMIN_ROLE);
@@ -28,11 +29,11 @@ public class UserConverter {
                 .toList();
     }
 
-    public static UserProfile convertGetProfileInformationResponseToUserProfile(UserDatabaseService.GetProfileInformationResponse response){
+    public static UserProfile convertGetProfileInformationResponseToUserProfile(UserDatabaseService.GetProfileInformationResponse response) {
         return new UserProfile(response);
     }
 
-    public static List<UserProfile> convertGetProfileInformationResponseToUserProfile(List<UserDatabaseService.GetProfileInformationResponse> response){
+    public static List<UserProfile> convertGetProfileInformationResponseToUserProfile(List<UserDatabaseService.GetProfileInformationResponse> response) {
         return response
                 .stream()
                 .map(UserConverter::convertGetProfileInformationResponseToUserProfile)
