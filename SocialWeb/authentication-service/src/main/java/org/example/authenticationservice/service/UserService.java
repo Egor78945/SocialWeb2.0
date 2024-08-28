@@ -45,41 +45,31 @@ public class UserService implements UserDetailsService {
 
     public void changeName(String name) throws JsonProcessingException {
         if (!name.isEmpty() && !name.isBlank() && name.length() <= 30) {
-            if (userGrpcService.changeName(getUserProfile().getId(), name)) {
-                reloadUserToRedis();
-            }
+            userGrpcService.changeName(getUserProfile().getId(), name);
         } else throw new IllegalArgumentException("Illegal name format.");
     }
 
     public void changeSurname(String surname) throws JsonProcessingException {
         if (!surname.isEmpty() && !surname.isBlank() && surname.length() <= 50) {
-            if (userGrpcService.changeSurname(getUserProfile().getId(), surname)) {
-                reloadUserToRedis();
-            }
+            userGrpcService.changeSurname(getUserProfile().getId(), surname);
         } else throw new IllegalArgumentException("Illegal surname format.");
     }
 
     public void changeAge(Integer age) throws JsonProcessingException {
         if (age >= 14 && age <= 111) {
-            if (userGrpcService.changeAge(getUserProfile().getId(), age)) {
-                reloadUserToRedis();
-            }
+            userGrpcService.changeAge(getUserProfile().getId(), age);
         } else throw new IllegalArgumentException("Age is too low or high.");
     }
 
     public void changeStatus(String status) throws JsonProcessingException {
         if (!status.isEmpty() && !status.isBlank() && status.length() <= 100) {
-            if (userGrpcService.changeStatus(getUserProfile().getId(), status)) {
-                reloadUserToRedis();
-            }
+            userGrpcService.changeStatus(getUserProfile().getId(), status);
         } else throw new IllegalArgumentException("Status is empty or too long.");
     }
 
     public void changeCity(String city) throws JsonProcessingException {
         if (!city.isEmpty() && !city.isBlank() && city.length() <= 50) {
-            if (userGrpcService.changeCity(getUserProfile().getId(), city)) {
-                reloadUserToRedis();
-            }
+            userGrpcService.changeCity(getUserProfile().getId(), city);
         } else throw new IllegalArgumentException("City is empty or too long.");
     }
 
@@ -95,19 +85,11 @@ public class UserService implements UserDetailsService {
         } else throw new IllegalArgumentException("Illegal password format.");
     }
 
-    public boolean incrementFriendCount(Long userId) throws JsonProcessingException {
-        boolean result = userGrpcService.incrementFriendCount(userId);
-        reloadUserToRedis();
-        return result;
+    public boolean incrementFriendCount(Long userId) {
+        return userGrpcService.incrementFriendCount(userId);
     }
 
-    public boolean decrementFriendCount(Long userId) throws JsonProcessingException {
-        boolean result = userGrpcService.decrementFriendCount(userId);
-        reloadUserToRedis();
-        return result;
-    }
-
-    public void reloadUserToRedis() throws JsonProcessingException {
-        redisService.saveObject(RedisKey.CURRENT_KEY.name(), getUserProfile(getUserProfile().getId()));
+    public boolean decrementFriendCount(Long userId) {
+        return userGrpcService.decrementFriendCount(userId);
     }
 }
