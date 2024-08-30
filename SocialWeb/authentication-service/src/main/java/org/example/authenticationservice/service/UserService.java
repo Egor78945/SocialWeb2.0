@@ -43,6 +43,10 @@ public class UserService implements UserDetailsService {
         return new UserProfile(userGrpcService.getProfileInformation(id));
     }
 
+    public void refreshUser() throws JsonProcessingException {
+        redisService.saveObject(RedisKey.CURRENT_KEY.name(), getUserProfile(getUserProfile().getId()));
+    }
+
     public void changeName(String name) throws JsonProcessingException {
         if (!name.isEmpty() && !name.isBlank() && name.length() <= 30) {
             userGrpcService.changeName(getUserProfile().getId(), name);
