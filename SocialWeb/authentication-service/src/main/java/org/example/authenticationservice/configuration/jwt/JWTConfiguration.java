@@ -35,7 +35,8 @@ public class JWTConfiguration {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(getUserDetails(authentication).getUsername())
-                .setIssuedAt(new Date((new Date()).getTime() + lifetime))
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + lifetime))
                 .signWith(getSigningKey(secret), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -63,7 +64,9 @@ public class JWTConfiguration {
 
     private List<String> getRolesFromPrincipal(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return userDetails.getAuthorities().stream()
+        return userDetails
+                .getAuthorities()
+                .stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
     }

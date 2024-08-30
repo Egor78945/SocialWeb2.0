@@ -16,7 +16,7 @@ public class RedisService {
         redisTemplate.opsForValue().set(key, jsonMapper.writeValueAsString(value));
     }
 
-    public String getObject(String key) throws JsonProcessingException {
+    public String getObject(String key) {
         return (String) redisTemplate.opsForValue().get(key);
     }
 
@@ -24,7 +24,7 @@ public class RedisService {
         redisTemplate.opsForHash().put(key, hashKey, jsonMapper.writeValueAsString(value));
     }
 
-    public String getFromHash(String key, String hashKey) throws JsonProcessingException {
+    public String getFromHash(String key, String hashKey) {
         return (String) redisTemplate.opsForHash().get(key, hashKey);
     }
 }

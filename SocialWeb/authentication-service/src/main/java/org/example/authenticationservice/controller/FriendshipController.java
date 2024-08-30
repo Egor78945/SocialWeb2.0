@@ -27,13 +27,13 @@ public class FriendshipController {
         return ResponseEntity.ok("Request has been accepted.");
     }
 
-    @PostMapping("/reject/{id}")
+    @DeleteMapping("/reject/{id}")
     public ResponseEntity<String> rejectFriendshipRequest(@PathVariable("id") Long id) throws JsonProcessingException {
         friendshipService.rejectFriendshipRequest(id);
         return ResponseEntity.ok("Request has been rejected.");
     }
 
-    @PostMapping("/discard/{id}")
+    @DeleteMapping("/discard/{id}")
     public ResponseEntity<String> discardFriendship(@PathVariable("id") Long id) throws JsonProcessingException {
         friendshipService.discardFriendshipRequest(id);
         return ResponseEntity.ok("The user is not longer your friend.");
