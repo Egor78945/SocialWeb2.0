@@ -2,6 +2,7 @@ package org.example.authenticationservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import org.example.authenticationservice.annotation.FriendshipControllerAdvice;
 import org.example.authenticationservice.model.response.UserProfile;
 import org.example.authenticationservice.service.FriendshipService;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/friend")
 @RequiredArgsConstructor
+@FriendshipControllerAdvice
 public class FriendshipController {
     private final FriendshipService friendshipService;
 

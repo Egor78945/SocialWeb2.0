@@ -2,6 +2,7 @@ package org.example.authenticationservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import org.example.authenticationservice.annotation.AuthenticationControllerAdvice;
 import org.example.authenticationservice.model.request.AuthenticationRequestModel;
 import org.example.authenticationservice.model.request.RegisterRequestModel;
 import org.example.authenticationservice.service.authentication.AuthenticationService;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@AuthenticationControllerAdvice
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
