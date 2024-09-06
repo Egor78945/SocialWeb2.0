@@ -9,6 +9,10 @@ spring:
           uri: lb://authentication-service
           predicates:
             - Path=/auth, /profile/**, /friend/**
+        - id: message-service
+          uri: lb://message-service
+          predicates:
+            - Path=/message/**
 
 eureka:
   client:

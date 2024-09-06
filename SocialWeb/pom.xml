@@ -20,6 +20,7 @@
         <module>authentication-service</module>
         <module>user-database-service</module>
         <module>friendship-service</module>
+        <module>message-service</module>
     </modules>
 
     <dependencies>
