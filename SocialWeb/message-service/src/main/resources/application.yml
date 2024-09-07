@@ -8,6 +8,11 @@ spring:
       port: 6379
       timeout: 100000
 
+  kafka:
+    bootstrap-servers: http://kafka:9092
+    listener:
+      ack-mode: record
+
 eureka:
   client:
     service-url:
@@ -17,7 +22,16 @@ eureka:
 
 jwt:
   secret: jeXWnV9fY7BPLPEuJaBnJVETR1M5pSpXtDmnqy1KK1py+gLvFCMe1u84F8t5ZkNH
-  lifetime: 600000
+  lifetime: 60000
+
+kafka:
+  topic:
+    db:
+      save-request: db-save-request-topic
+      save-response: db-save-response-topic
+    s3:
+      save: s3-save-topic
+
 
 server:
   port: 0
