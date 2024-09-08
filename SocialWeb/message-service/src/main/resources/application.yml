@@ -36,6 +36,11 @@ kafka:
       save: s3-save-topic
       transaction-id: s3-topic-id
 
+grpc:
+  client:
+    user-grpc-service:
+      address: 'discovery:///user-database-service'
+      negotiation-type: plaintext
 
 server:
   port: 0

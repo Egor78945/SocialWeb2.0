@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package com.example.grpc.user;
+
+message StringRequest {
+  string string = 1;
+}
+
+message LongRequest{
+  int64 long = 1;
+}
+
+message DetailsResponse {
+  string password = 1;
+  repeated string roles = 2;
+}
+
+message BooleanResponse{
+  bool boolean = 1;
+}
+
+message RegisterUserRequest{
+  string name = 1;
+  string surname = 2;
+  int32 age = 3;
+  string email = 4;
+  string city = 5;
+  string password = 6;
+  repeated string role = 7;
+}
+
+message LongResponse {
+  int64 long = 1;
+}
+
+message GetProfileInformationResponse {
+  int64 id = 1;
+  string name = 2;
+  string surname = 3;
+  int32 age = 4;
+  string city = 5;
+  int32 friendCount = 6;
+  string registerDate = 7;
+  string status = 8;
+}
+
+message ListGetProfileInformationResponse {
+  repeated GetProfileInformationResponse responseList = 1;
+}
+
+message LongStringRequest{
+  int64 long = 1;
+  string string = 2;
+}
+
+message LongIntegerRequest{
+  int64 long = 1;
+  int32 integer = 2;
+}
+
+message LongListRequest{
+  repeated int64 longs = 1;
+}
+
+service UserService{
+  rpc getUserDetails (StringRequest) returns (DetailsResponse);
+  rpc getEmailUnique (StringRequest) returns (BooleanResponse);
+  rpc registerUser (RegisterUserRequest) returns (LongResponse);
+  rpc getProfileInformationByEmail (StringRequest) returns (GetProfileInformationResponse);
+  rpc getProfileInformationById (LongRequest) returns (GetProfileInformationResponse);
+  rpc changeName(LongStringRequest) returns (BooleanResponse);
+  rpc changeSurname(LongStringRequest) returns (BooleanResponse);
+  rpc changeAge(LongIntegerRequest) returns (BooleanResponse);
+  rpc changeStatus(LongStringRequest) returns (BooleanResponse);
+  rpc changeCity(LongStringRequest) returns (BooleanResponse);
+  rpc changeEmail(LongStringRequest) returns (BooleanResponse);
+  rpc changePassword(LongStringRequest) returns (BooleanResponse);
+  rpc getProfileInformationByListId(LongListRequest) returns (ListGetProfileInformationResponse);
+  rpc incrementFriendCount(LongRequest) returns (BooleanResponse);
+  rpc decrementFriendCount(LongRequest) returns (BooleanResponse);
+}
