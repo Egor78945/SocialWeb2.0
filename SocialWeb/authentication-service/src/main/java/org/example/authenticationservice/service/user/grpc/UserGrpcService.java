@@ -25,6 +25,10 @@ public class UserGrpcService {
         return userServiceBlockingStub.getEmailUnique(UserDatabaseServiceBuilder.build(email));
     }
 
+    public UserDatabaseService.BooleanResponse existsUserById(UserDatabaseService.LongRequest request){
+        return userServiceBlockingStub.existsUserById(request);
+    }
+
     public UserDatabaseService.LongResponse registerUser(RegisterRequestModel requestModel) {
         UserDatabaseService.RegisterUserRequest request = UserDatabaseService.RegisterUserRequest
                 .newBuilder()

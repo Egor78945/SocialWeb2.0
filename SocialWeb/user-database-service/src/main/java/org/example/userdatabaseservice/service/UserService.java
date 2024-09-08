@@ -24,7 +24,7 @@ public class UserService {
     }
 
     @Transactional
-    public boolean getUserExists(String email) {
+    public boolean existsUserByEmail(String email) {
         return userRepository.existsUserByEmail(email);
     }
 
@@ -96,5 +96,10 @@ public class UserService {
         if(userRepository.getUserFriendCountById(userId) > 0) {
             userRepository.decrementUserFriendCountById(userId);
         }
+    }
+
+    @Transactional
+    public boolean existsUserById(Long id){
+        return userRepository.existsById(id);
     }
 }

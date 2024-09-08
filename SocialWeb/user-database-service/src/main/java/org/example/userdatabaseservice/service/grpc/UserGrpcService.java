@@ -33,7 +33,13 @@ public class UserGrpcService extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
     public void getEmailUnique(UserDatabaseService.StringRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
-        responseObserver.onNext(UserDatabaseServiceBuilder.build(!userService.getUserExists(request.getString())));
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(!userService.existsUserByEmail(request.getString())));
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void existsUserById(UserDatabaseService.LongRequest request, StreamObserver<UserDatabaseService.BooleanResponse> responseObserver) {
+        responseObserver.onNext(UserDatabaseServiceBuilder.build(userService.existsUserById(request.getLong())));
         responseObserver.onCompleted();
     }
 

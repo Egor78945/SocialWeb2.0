@@ -20,7 +20,7 @@ eureka:
     service-url:
       defaultZone: http://service-discovery:8761/eureka
     register-with-eureka: true
-    fetch-registry: false
+    fetch-registry: true
 
 jwt:
   secret: jeXWnV9fY7BPLPEuJaBnJVETR1M5pSpXtDmnqy1KK1py+gLvFCMe1u84F8t5ZkNH
@@ -41,6 +41,7 @@ grpc:
     user-grpc-service:
       address: 'discovery:///user-database-service'
       negotiation-type: plaintext
+
 
 server:
   port: 0

@@ -78,4 +78,5 @@ service UserService{
   rpc getProfileInformationByListId(LongListRequest) returns (ListGetProfileInformationResponse);
   rpc incrementFriendCount(LongRequest) returns (BooleanResponse);
   rpc decrementFriendCount(LongRequest) returns (BooleanResponse);
+  rpc existsUserById(LongRequest) returns (BooleanResponse);
 }
