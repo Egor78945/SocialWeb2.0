@@ -1,16 +1,15 @@
 package org.example.j2ee.messageservice.service.message;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.example.j2ee.messageservice.enumeration.redis.RedisKey;
 import org.example.j2ee.messageservice.model.kafka.MessageAddressModel;
 import org.example.j2ee.messageservice.model.user.UserProfile;
-import org.example.j2ee.messageservice.service.builder.UserDatabaseServiceBuilder;
+import org.example.j2ee.messageservice.util.builder.UserDatabaseServiceBuilder;
 import org.example.j2ee.messageservice.service.kafka.producer.KafkaDbProducer;
 import org.example.j2ee.messageservice.service.redis.RedisService;
 import org.example.j2ee.messageservice.service.user.grpc.UserGrpcService;
-import org.example.j2ee.messageservice.service.validator.message.MessageValidator;
+import org.example.j2ee.messageservice.util.validator.message.MessageValidator;
 import org.springframework.stereotype.Service;
 
 @Service
