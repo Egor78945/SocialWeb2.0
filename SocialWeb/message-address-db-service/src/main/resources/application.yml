@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: message-address-db-service
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://postgres:5432/social_web
+    username: bestuser
+    password: bestuser
+
+  jpa:
+    database: postgresql
+    show-sql: true
+
+  liquibase:
+    change-log: db/changelog/main/main-changelog.yml
+
+  data:
+    jdbc:
+      dialect: postgresql
+
+  kafka:
+    bootstrap-servers: kafka1:9092, kafka2:9092, kafka3:9092
+    listener:
+      ack-mode: record
+    consumer:
+      auto-offset-reset: earliest
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: *
+
+kafka:
+  topic:
+    db:
+      save-response: db-save-response-topic
+      transaction-id: db-save-response-topic-id
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-discovery:8761/eureka
+    register-with-eureka: true
+    fetch-registry: false
+
+server:
+  port: 0

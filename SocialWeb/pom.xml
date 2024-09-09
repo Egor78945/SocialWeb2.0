@@ -21,6 +21,7 @@
         <module>user-database-service</module>
         <module>friendship-service</module>
         <module>message-service</module>
+        <module>message-address-db-service</module>
     </modules>
 
     <dependencies>

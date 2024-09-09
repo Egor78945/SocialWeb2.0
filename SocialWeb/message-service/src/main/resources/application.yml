@@ -31,7 +31,7 @@ kafka:
     db:
       save-request: db-save-request-topic
       save-response: db-save-response-topic
-      transaction-id: db-topic-id
+      transaction-id: db-save-request-topic-id
     s3:
       save: s3-save-topic
       transaction-id: s3-topic-id
