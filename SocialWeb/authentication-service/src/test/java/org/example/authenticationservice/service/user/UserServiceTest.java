@@ -66,7 +66,7 @@ public class UserServiceTest {
     @Test
     public void getUserProfile() throws JsonProcessingException {
         Mockito.when(redisService.getObject("CURRENT_KEY")).thenReturn("");
-        Mockito.when(jsonMapper.readValue("", UserProfile.class)).thenReturn(new UserProfile());
+        Mockito.when(redisService.readValueAs("", UserProfile.class)).thenReturn(new UserProfile());
         Assertions.assertEquals(userService.getUserProfile().getClass(), UserProfile.class);
     }
 

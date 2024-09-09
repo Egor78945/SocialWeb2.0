@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
     }
 
     public UserProfile getUserProfile() throws JsonProcessingException {
-        return jsonMapper.readValue(redisService.getObject(RedisKey.CURRENT_KEY.name()), UserProfile.class);
+        return redisService.readValueAs(redisService.getObject(RedisKey.CURRENT_KEY.name()), UserProfile.class);
     }
 
     public UserProfile getUserProfile(Long id) {

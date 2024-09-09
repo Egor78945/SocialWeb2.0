@@ -28,4 +28,8 @@ public class RedisService {
     public String getFromHash(String key, String hashKey) {
         return (String) redisTemplate.opsForHash().get(key, hashKey);
     }
+
+    public <T> T readValueAs(String jsonString, Class<T> classTo) throws JsonProcessingException {
+        return jsonMapper.readValue(jsonString, classTo);
+    }
 }
