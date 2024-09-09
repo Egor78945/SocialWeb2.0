@@ -2,6 +2,7 @@ package org.example.authenticationservice.service.user;
 
 import com.example.grpc.user.UserDatabaseService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.RequiredArgsConstructor;
 import org.example.authenticationservice.enumeration.redis.RedisKey;
@@ -22,7 +23,7 @@ import org.springframework.stereotype.Service;
 public class UserService implements UserDetailsService {
     private final UserGrpcService userGrpcService;
     private final RedisService redisService;
-    private final JsonMapper jsonMapper;
+    private final ObjectMapper jsonMapper;
     private final PasswordEncoder passwordEncoder;
 
     @Override
