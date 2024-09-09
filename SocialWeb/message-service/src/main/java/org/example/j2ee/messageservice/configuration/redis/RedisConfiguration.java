@@ -1,6 +1,5 @@
-package org.example.authenticationservice.configuration.redis;
+package org.example.j2ee.messageservice.configuration.redis;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +33,7 @@ public class RedisConfiguration {
     }
 
     @Bean
-    public ObjectMapper jsonMapper(){
+    public JsonMapper jsonMapper(){
         return new JsonMapper();
     }
 }

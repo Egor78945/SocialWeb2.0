@@ -1,9 +1,14 @@
 package org.example.j2ee.messageservice.service.message;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.example.j2ee.messageservice.enumeration.redis.RedisKey;
 import org.example.j2ee.messageservice.model.kafka.MessageAddressModel;
+import org.example.j2ee.messageservice.model.user.UserProfile;
 import org.example.j2ee.messageservice.service.builder.UserDatabaseServiceBuilder;
 import org.example.j2ee.messageservice.service.kafka.producer.KafkaDbProducer;
+import org.example.j2ee.messageservice.service.redis.RedisService;
 import org.example.j2ee.messageservice.service.user.grpc.UserGrpcService;
 import org.example.j2ee.messageservice.service.validator.message.MessageValidator;
 import org.springframework.stereotype.Service;
@@ -13,8 +18,10 @@ import org.springframework.stereotype.Service;
 public class MessageService {
     private final KafkaDbProducer kafkaDbProducer;
     private final UserGrpcService userGrpcService;
+    private final RedisService redisService;
 
-    public void sendMessage(Long senderId, Long recipientId, String message) {
+    public void sendMessage(Long recipientId, String message) throws JsonProcessingException {
+        Long senderId = redisService.readValueAs(redisService.getObject(RedisKey.CURRENT_KEY.name()), UserProfile.class).getId();
         if (!MessageValidator.isValid(message)) {
             throw new IllegalArgumentException("Message is too long or empty. Maximum size of message - 500 symbols.");
         } else if (senderId.equals(recipientId)){

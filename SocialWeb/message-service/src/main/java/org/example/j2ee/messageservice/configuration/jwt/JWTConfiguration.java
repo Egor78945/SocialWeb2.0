@@ -1,5 +1,7 @@
 package org.example.j2ee.messageservice.configuration.jwt;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -7,6 +9,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -70,5 +73,10 @@ public class JWTConfiguration {
 
     private UserDetails getUserDetails(Authentication authentication) {
         return (UserDetails) authentication.getPrincipal();
+    }
+
+    @Bean
+    public ObjectMapper objectMapper(){
+        return new JsonMapper();
     }
 }
