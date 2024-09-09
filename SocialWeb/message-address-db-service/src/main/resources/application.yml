@@ -25,11 +25,6 @@ spring:
       ack-mode: record
     consumer:
       auto-offset-reset: earliest
-      properties:
-        spring:
-          json:
-            trusted:
-              packages: *
 
 kafka:
   topic:
