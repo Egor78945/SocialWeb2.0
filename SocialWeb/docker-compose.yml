@@ -55,6 +55,13 @@ services:
     depends_on:
       - authentication-service
 
+  message-address-db-service:
+    container_name: message-address-db-service
+    build: /message-address-db-service/.
+    restart: always
+    depends_on:
+      - message-service
+
   redis:
     image: redis:latest
     ports:
