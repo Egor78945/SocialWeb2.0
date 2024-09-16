@@ -10,13 +10,15 @@ public class KafkaDetails {
     private final String KAFKA_DB_SAVE_REQUEST_TOPIC;
     private final String KAFKA_DB_SAVE_RESPONSE_TOPIC;
     private final String KAFKA_DB_TOPIC_TRANSACTION_ID;
+    private final String KAFKA_DB_SAVE_REQUEST_TOPIC_GROUP_ID;
 
-    public KafkaDetails(@Value("${spring.kafka.bootstrap-servers}") String KAFKA_BOOTSTRAP_SERVER, @Value("${spring.kafka.consumer.auto-offset-reset}") String KAFKA_AUTO_OFFSET_RESET, @Value("${kafka.topic.db.save-request}") String KAFKA_DB_SAVE_REQUEST_TOPIC, @Value("${kafka.topic.db.save-response}") String KAFKA_DB_SAVE_RESPONSE_TOPIC, @Value("${kafka.topic.db.transaction-id}") String KAFKA_DB_TOPIC_TRANSACTION_ID) {
+    public KafkaDetails(@Value("${spring.kafka.bootstrap-servers}") String KAFKA_BOOTSTRAP_SERVER, @Value("${spring.kafka.consumer.auto-offset-reset}") String KAFKA_AUTO_OFFSET_RESET, @Value("${kafka.topic.db.save-request}") String KAFKA_DB_SAVE_REQUEST_TOPIC, @Value("${kafka.topic.db.save-response}") String KAFKA_DB_SAVE_RESPONSE_TOPIC, @Value("${kafka.topic.db.transaction-id}") String KAFKA_DB_TOPIC_TRANSACTION_ID, @Value("${spring.kafka.consumer.group-id}") String KAFKA_DB_SAVE_REQUEST_TOPIC_GROUP_ID) {
         this.KAFKA_BOOTSTRAP_SERVER = KAFKA_BOOTSTRAP_SERVER;
         this.KAFKA_AUTO_OFFSET_RESET = KAFKA_AUTO_OFFSET_RESET;
         this.KAFKA_DB_SAVE_REQUEST_TOPIC = KAFKA_DB_SAVE_REQUEST_TOPIC;
         this.KAFKA_DB_SAVE_RESPONSE_TOPIC = KAFKA_DB_SAVE_RESPONSE_TOPIC;
         this.KAFKA_DB_TOPIC_TRANSACTION_ID = KAFKA_DB_TOPIC_TRANSACTION_ID;
+        this.KAFKA_DB_SAVE_REQUEST_TOPIC_GROUP_ID = KAFKA_DB_SAVE_REQUEST_TOPIC_GROUP_ID;
     }
 
     public String getKAFKA_BOOTSTRAP_SERVER() {
@@ -37,5 +39,9 @@ public class KafkaDetails {
 
     public String getKAFKA_DB_TOPIC_TRANSACTION_ID() {
         return KAFKA_DB_TOPIC_TRANSACTION_ID;
+    }
+
+    public String getKAFKA_DB_SAVE_REQUEST_TOPIC_GROUP_ID() {
+        return KAFKA_DB_SAVE_REQUEST_TOPIC_GROUP_ID;
     }
 }
