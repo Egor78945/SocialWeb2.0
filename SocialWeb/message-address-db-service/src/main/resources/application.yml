@@ -29,6 +29,7 @@ spring:
 kafka:
   topic:
     db:
+      save-request: db-save-request-topic
       save-response: db-save-response-topic
       transaction-id: db-save-response-topic-id
 
