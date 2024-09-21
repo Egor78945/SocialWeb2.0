@@ -13,24 +13,6 @@ public class KafkaTopicConfiguration {
     private final KafkaDetails kafkaDetails;
 
     @Bean
-    public NewTopic dbSaveRequestTopic(){
-        return TopicBuilder
-                .name(kafkaDetails.getKAFKA_DB_SAVE_REQUEST_TOPIC())
-                .replicas(2)
-                .partitions(3)
-                .build();
-    }
-
-    @Bean
-    public NewTopic dbSaveResponseTopic(){
-        return TopicBuilder
-                .name(kafkaDetails.getKAFKA_DB_SAVE_RESPONSE_TOPIC())
-                .replicas(2)
-                .partitions(3)
-                .build();
-    }
-
-    @Bean
     public NewTopic s3SaveTopic(){
         return TopicBuilder
                 .name(kafkaDetails.getKAFKA_S3_SAVE_TOPIC())

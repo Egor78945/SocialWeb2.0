@@ -53,14 +53,14 @@ services:
     build: /message-service/.
     restart: always
     depends_on:
-      - authentication-service
+      - message-address-db-service
 
   message-address-db-service:
     container_name: message-address-db-service
     build: /message-address-db-service/.
     restart: always
     depends_on:
-      - message-service
+      - authentication-service
 
   redis:
     image: redis:latest
@@ -96,6 +96,7 @@ services:
     image: confluentinc/cp-kafka:latest
     depends_on:
       - zookeeper
+      - kafka1
     ports:
       - "29093:29093"
     environment:
@@ -110,6 +111,7 @@ services:
     image: confluentinc/cp-kafka:latest
     depends_on:
       - zookeeper
+      - kafka2
     ports:
       - "29094:29094"
     environment:
