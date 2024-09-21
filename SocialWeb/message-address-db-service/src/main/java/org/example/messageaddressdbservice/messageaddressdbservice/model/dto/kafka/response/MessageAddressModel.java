@@ -1,4 +1,4 @@
-package org.example.messageaddressdbservice.messageaddressdbservice.model.kafka;
+package org.example.messageaddressdbservice.messageaddressdbservice.model.dto.kafka.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

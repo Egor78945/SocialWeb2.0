@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.example.messageaddressdbservice.messageaddressdbservice.configuration.kafka.KafkaDetails;
-import org.example.messageaddressdbservice.messageaddressdbservice.model.kafka.MessageAddressModel;
+import org.example.messageaddressdbservice.messageaddressdbservice.model.dto.kafka.response.MessageAddressModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.ConsumerFactory;
@@ -28,7 +28,7 @@ public class KafkaConsumerFactoryConfiguration {
 
     @Bean
     public ConsumerFactory<String, MessageAddressModel> messageAddressModelConsumerFactory(ObjectMapper objectMapper) {
-        var kafkaConsumerFactory = new DefaultKafkaConsumerFactory<String, MessageAddressModel>(kafkaConsumerProperties("org.example.j2ee.messageservice.model.kafka.MessageAddressModel", "org.example.messageaddressdbservice.messageaddressdbservice.model.kafka.MessageAddressModel"));
+        var kafkaConsumerFactory = new DefaultKafkaConsumerFactory<String, MessageAddressModel>(kafkaConsumerProperties("org.example.j2ee.messageservice.model.kafka.MessageAddressModel", "org.example.messageaddressdbservice.messageaddressdbservice.model.dto.kafka.response.MessageAddressModel"));
         kafkaConsumerFactory.setValueDeserializer(new JsonDeserializer<>(objectMapper));
 
         return kafkaConsumerFactory;

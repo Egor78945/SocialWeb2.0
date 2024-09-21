@@ -14,6 +14,6 @@ public class MessageController {
     @PostMapping
     public ResponseEntity<String> sendMessage(@RequestParam("recipient") Long recipient, @RequestParam("message") String message) throws JsonProcessingException {
         messageService.sendMessage(recipient, message);
-        return ResponseEntity.ok("hello");
+        return ResponseEntity.ok(String.format("Message has been sent to user with id %s", recipient));
     }
 }

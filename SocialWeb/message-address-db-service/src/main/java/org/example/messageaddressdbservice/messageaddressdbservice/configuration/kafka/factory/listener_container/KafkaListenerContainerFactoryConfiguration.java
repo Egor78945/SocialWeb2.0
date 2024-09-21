@@ -1,6 +1,6 @@
 package org.example.messageaddressdbservice.messageaddressdbservice.configuration.kafka.factory.listener_container;
 
-import org.example.messageaddressdbservice.messageaddressdbservice.model.kafka.MessageAddressModel;
+import org.example.messageaddressdbservice.messageaddressdbservice.model.dto.kafka.response.MessageAddressModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
