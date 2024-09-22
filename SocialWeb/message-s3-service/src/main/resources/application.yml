@@ -8,6 +8,7 @@ spring:
       ack-mode: record
     consumer:
       auto-offset-reset: earliest
+      group-id: s3-save-request
 
 eureka:
   client:
