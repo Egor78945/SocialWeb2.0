@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.example.j2ee.messageservice.enumeration.redis.RedisKey;
 import org.example.j2ee.messageservice.model.kafka.MessageAddressModel;
+import org.example.j2ee.messageservice.model.kafka.MessageDataModel;
 import org.example.j2ee.messageservice.model.user.UserProfile;
+import org.example.j2ee.messageservice.service.kafka.producer.KafkaS3Producer;
 import org.example.j2ee.messageservice.util.builder.UserDatabaseServiceBuilder;
 import org.example.j2ee.messageservice.service.kafka.producer.KafkaDbProducer;
 import org.example.j2ee.messageservice.service.redis.RedisService;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MessageService {
     private final KafkaDbProducer kafkaDbProducer;
+    private final KafkaS3Producer kafkaS3Producer;
     private final UserGrpcService userGrpcService;
     private final RedisService redisService;
 
@@ -32,5 +35,8 @@ public class MessageService {
         }
         Long currentTime = System.currentTimeMillis() + 10800000;
         kafkaDbProducer.send(String.valueOf(senderId + recipientId + currentTime), new MessageAddressModel(senderId, recipientId, currentTime));
+
+        String messageAddress = String.format("%s/%s/%s", senderId, recipientId, currentTime);
+        kafkaS3Producer.send(String.valueOf(senderId + recipientId + currentTime), new MessageDataModel(messageAddress, message));
     }
 }
