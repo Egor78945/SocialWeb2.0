@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.example.messageaddressdbservice.messageaddressdbservice.configuration.kafka.KafkaDetails;
+import org.example.messageaddressdbservice.messageaddressdbservice.configuration.kafka.properties.KafkaProperties;
 import org.example.messageaddressdbservice.messageaddressdbservice.model.dto.kafka.response.MessageAddressModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Configuration
 @RequiredArgsConstructor
 public class KafkaConsumerFactoryConfiguration {
-    private final KafkaDetails kafkaDetails;
+    private final KafkaProperties kafkaProperties;
 
     @Bean
     public ObjectMapper objectMapper() {
@@ -40,8 +40,8 @@ public class KafkaConsumerFactoryConfiguration {
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         properties.put(JsonDeserializer.TYPE_MAPPINGS, String.format("%s:%s", classPathFrom, classPathTo));
-        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaDetails.getKAFKA_BOOTSTRAP_SERVER());
-        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, kafkaDetails.getKAFKA_AUTO_OFFSET_RESET());
+        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getKAFKA_BOOTSTRAP_SERVER());
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, kafkaProperties.getKAFKA_AUTO_OFFSET_RESET());
 
         return properties;
     }

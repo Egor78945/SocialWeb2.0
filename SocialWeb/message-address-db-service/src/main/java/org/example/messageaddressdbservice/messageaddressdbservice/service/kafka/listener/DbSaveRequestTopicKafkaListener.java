@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class DbSaveRequestTopicKafkaListener {
     private final MessageAddressService messageAddressService;
 
-    @KafkaListener(topics = "${kafka.topic.db.save-request}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "messageAddressListenerContainerFactory")
+    @KafkaListener(topics = "${kafka.topic.db.save}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "messageAddressListenerContainerFactory")
     public void messageAddressTopicListener(MessageAddressModel messageAddressModel) {
         messageAddressService.saveMessageAddress(new MessageAddress(messageAddressModel));
     }
