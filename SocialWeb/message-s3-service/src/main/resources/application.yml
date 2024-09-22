@@ -16,6 +16,13 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
 
+minio:
+  url: http://minio:900
+  bucket: messages
+  security:
+    access-key: user
+    secret-key: userpassword
+
 kafka:
   topic:
     s3:
