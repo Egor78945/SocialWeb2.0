@@ -22,6 +22,7 @@
         <module>friendship-service</module>
         <module>message-service</module>
         <module>message-address-db-service</module>
+        <module>message-s3-service</module>
     </modules>
 
     <dependencies>
