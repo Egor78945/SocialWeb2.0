@@ -25,7 +25,7 @@ spring:
       ack-mode: record
     consumer:
       auto-offset-reset: earliest
-      group-id: db-save-topic-id
+      group-id: db-save-topic-group-id
 
 kafka:
   topic:

@@ -8,7 +8,7 @@ spring:
       ack-mode: record
     consumer:
       auto-offset-reset: earliest
-      group-id: s3-save-topic-id
+      group-id: s3-save-topic-group-id
 
 eureka:
   client:
