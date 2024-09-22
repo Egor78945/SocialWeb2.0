@@ -3,9 +3,8 @@ package org.example.j2ee.messageservice.configuration.kafka.factory.producer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.serialization.LongSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.example.j2ee.messageservice.configuration.kafka.KafkaDetails;
+import org.example.j2ee.messageservice.configuration.kafka.properties.KafkaProperties;
 import org.example.j2ee.messageservice.model.kafka.MessageAddressModel;
 import org.example.j2ee.messageservice.model.kafka.MessageDataModel;
 import org.springframework.context.annotation.Bean;
@@ -20,11 +19,11 @@ import java.util.Map;
 @Configuration
 @RequiredArgsConstructor
 public class KafkaProducerFactory {
-    private final KafkaDetails kafkaDetails;
+    private final KafkaProperties kafkaProperties;
 
     @Bean
     public ProducerFactory<String, MessageAddressModel> messageAddressModelProducerFactory(ObjectMapper objectMapper) {
-        DefaultKafkaProducerFactory<String, MessageAddressModel> producerFactory = new DefaultKafkaProducerFactory<>(producerProperties(kafkaDetails.getKAFKA_DB_TOPIC_TRANSACTION_ID()));
+        DefaultKafkaProducerFactory<String, MessageAddressModel> producerFactory = new DefaultKafkaProducerFactory<>(producerProperties(kafkaProperties.getKAFKA_DB_TOPIC_TRANSACTION_ID()));
         producerFactory.setValueSerializer(new JsonSerializer<>(objectMapper));
 
         return producerFactory;
@@ -32,7 +31,7 @@ public class KafkaProducerFactory {
 
     @Bean
     public ProducerFactory<String, MessageDataModel> messageDataModelProducerFactory(ObjectMapper objectMapper) {
-        DefaultKafkaProducerFactory<String, MessageDataModel> producerFactory = new DefaultKafkaProducerFactory<>(producerProperties(kafkaDetails.getKAFKA_S3_TOPIC_TRANSACTION_ID()));
+        DefaultKafkaProducerFactory<String, MessageDataModel> producerFactory = new DefaultKafkaProducerFactory<>(producerProperties(kafkaProperties.getKAFKA_S3_TOPIC_TRANSACTION_ID()));
         producerFactory.setValueSerializer(new JsonSerializer<>(objectMapper));
 
         return producerFactory;
@@ -43,7 +42,7 @@ public class KafkaProducerFactory {
 
         producerProperties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         producerProperties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-        producerProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaDetails.getKAFKA_BOOTSTRAP_SERVER());
+        producerProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaProperties.getKAFKA_BOOTSTRAP_SERVER());
         producerProperties.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
         producerProperties.put(ProducerConfig.ACKS_CONFIG, "all");
         producerProperties.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, transactionId);
