@@ -28,7 +28,6 @@ kafka:
   topic:
     s3:
       save: s3-save-topic
-      transaction-id: s3-topic-id
 
 server:
   port: 0
