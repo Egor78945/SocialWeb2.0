@@ -78,6 +78,19 @@ services:
     ports:
       - "22181:2181"
 
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=user
+      - MINIO_ROOT_PASSWORD=userpassword
+    command: server ~/minio --console-address :9090
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+    volumes:
+      - D:\minio_datapart:/var/lib/minio/data
+
   kafka1:
     image: confluentinc/cp-kafka:latest
     depends_on:
