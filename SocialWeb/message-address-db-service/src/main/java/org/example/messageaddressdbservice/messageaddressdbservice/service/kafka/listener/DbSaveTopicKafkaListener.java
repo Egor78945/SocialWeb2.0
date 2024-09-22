@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DbSaveRequestTopicKafkaListener {
+public class DbSaveTopicKafkaListener {
     private final MessageAddressService messageAddressService;
 
     @KafkaListener(topics = "${kafka.topic.db.save}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "messageAddressListenerContainerFactory")
