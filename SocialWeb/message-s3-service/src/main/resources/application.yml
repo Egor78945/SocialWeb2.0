@@ -1,1 +1,26 @@
-spring.application.name=message-s3-service
+spring:
+  application:
+    name: message-s3-service
+
+  kafka:
+    bootstrap-servers: kafka1:9092, kafka2:9092, kafka3:9092
+    listener:
+      ack-mode: record
+    consumer:
+      auto-offset-reset: earliest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-discovery:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
+kafka:
+  topic:
+    s3:
+      save: s3-save-topic
+      transaction-id: s3-topic-id
+
+server:
+  port: 0
