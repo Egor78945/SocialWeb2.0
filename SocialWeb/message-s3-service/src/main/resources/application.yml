@@ -18,7 +18,7 @@ eureka:
     fetch-registry: true
 
 minio:
-  url: http://minio:900
+  url: http://minio:9000
   bucket: messages
   security:
     access-key: user
