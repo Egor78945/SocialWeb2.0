@@ -1,3 +1,22 @@
 syntax = "proto3";
 
 package com.example.grpc.message_address;
+
+message LongLongRequest {
+  int64 firstLong = 1;
+  int64 secondLong = 2;
+}
+
+message MessageAddressResponse {
+  int64 senderId = 1;
+  int64 recipientId = 2;
+  int64 timestamp = 3;
+}
+
+message ListMessageAddressResponse {
+  repeated MessageAddressResponse messageAddressResponses = 1;
+}
+
+service MessageAddressService {
+  rpc getMessageAddressesBySenderIdAndRecipientId (LongLongRequest) returns (ListMessageAddressResponse);
+}
