@@ -40,6 +40,9 @@ grpc:
     user-grpc-service:
       address: 'discovery:///user-database-service'
       negotiation-type: plaintext
+    message-address-db-grpc-service:
+      address: 'discovery:///message-address-db-service'
+      negotiation-type: plaintext
 
 
 server:
