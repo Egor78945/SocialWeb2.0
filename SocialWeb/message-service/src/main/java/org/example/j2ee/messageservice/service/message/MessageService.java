@@ -7,11 +7,11 @@ import org.example.j2ee.messageservice.model.kafka.MessageAddressModel;
 import org.example.j2ee.messageservice.model.kafka.MessageDataModel;
 import org.example.j2ee.messageservice.model.user.UserProfile;
 import org.example.j2ee.messageservice.service.kafka.producer.KafkaS3Producer;
-import org.example.j2ee.messageservice.util.builder.UserDatabaseServiceBuilder;
+import org.example.j2ee.messageservice.util.user.builder.UserDatabaseServiceBuilder;
 import org.example.j2ee.messageservice.service.kafka.producer.KafkaDbProducer;
 import org.example.j2ee.messageservice.service.redis.RedisService;
 import org.example.j2ee.messageservice.service.user.grpc.UserGrpcService;
-import org.example.j2ee.messageservice.util.validator.message.MessageValidator;
+import org.example.j2ee.messageservice.util.message.validator.message.MessageValidator;
 import org.springframework.stereotype.Service;
 
 @Service

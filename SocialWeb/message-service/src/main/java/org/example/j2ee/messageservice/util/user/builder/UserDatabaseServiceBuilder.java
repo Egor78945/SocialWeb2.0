@@ -1,4 +1,4 @@
-package org.example.j2ee.messageservice.util.builder;
+package org.example.j2ee.messageservice.util.user.builder;
 
 import com.example.grpc.user.UserDatabaseService;
 

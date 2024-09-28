@@ -1,4 +1,4 @@
-package org.example.messageaddressdbservice.messageaddressdbservice.service.grpc;
+package org.example.messageaddressdbservice.messageaddressdbservice.service.grpc.message_address;
 
 import com.example.grpc.message_address.MessageAddressDatabaseService;
 import com.example.grpc.message_address.MessageAddressServiceGrpc;

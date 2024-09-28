@@ -1,4 +1,4 @@
-package org.example.j2ee.messageservice.util.validator.message;
+package org.example.j2ee.messageservice.util.message.validator.message;
 
 public class MessageValidator {
     public static boolean isValid(String message){

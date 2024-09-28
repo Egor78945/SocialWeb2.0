@@ -1,4 +1,4 @@
-package org.example.friendshipservice.service;
+package org.example.friendshipservice.service.friendship;
 
 import lombok.RequiredArgsConstructor;
 import org.example.friendshipservice.model.entity.Friendship;

@@ -1,4 +1,4 @@
-package org.example.friendshipservice.service.util;
+package org.example.friendshipservice.util;
 
 import com.example.grpc.friendship.FriendshipDatabaseService;
 
