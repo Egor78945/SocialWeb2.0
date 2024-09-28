@@ -1,4 +1,4 @@
-package org.example.messageaddressdbservice.messageaddressdbservice.service;
+package org.example.messageaddressdbservice.messageaddressdbservice.service.message_address;
 
 import lombok.RequiredArgsConstructor;
 import org.example.messageaddressdbservice.messageaddressdbservice.model.entity.MessageAddress;

@@ -5,7 +5,7 @@ import com.example.grpc.message_address.MessageAddressServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
-import org.example.messageaddressdbservice.messageaddressdbservice.service.MessageAddressService;
+import org.example.messageaddressdbservice.messageaddressdbservice.service.message_address.MessageAddressService;
 import org.example.messageaddressdbservice.messageaddressdbservice.utils.converter.MessageAddressDatabaseGrpcServiceConverter;
 
 @GrpcService
