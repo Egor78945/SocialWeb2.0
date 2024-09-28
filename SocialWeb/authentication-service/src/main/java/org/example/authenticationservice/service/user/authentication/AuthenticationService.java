@@ -9,7 +9,7 @@ import org.example.authenticationservice.model.request.RegisterRequestModel;
 import org.example.authenticationservice.service.user.UserService;
 import org.example.authenticationservice.service.user.grpc.UserGrpcService;
 import org.example.authenticationservice.service.redis.RedisService;
-import org.example.authenticationservice.util.validator.user.UserValidator;
+import org.example.authenticationservice.util.user.validator.UserValidator;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

@@ -1,5 +1,6 @@
 package org.example.authenticationservice.util.validator.user;
 
+import org.example.authenticationservice.util.user.validator.UserValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

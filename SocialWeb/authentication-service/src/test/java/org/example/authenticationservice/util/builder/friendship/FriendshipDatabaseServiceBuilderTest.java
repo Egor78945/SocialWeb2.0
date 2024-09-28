@@ -1,6 +1,7 @@
 package org.example.authenticationservice.util.builder.friendship;
 
 import com.example.grpc.friendship.FriendshipDatabaseService;
+import org.example.authenticationservice.util.friendship.builder.grpc.FriendshipDatabaseServiceBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

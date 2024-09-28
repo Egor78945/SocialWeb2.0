@@ -6,7 +6,7 @@ import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.example.friendshipservice.service.friendship.FriendshipService;
-import org.example.friendshipservice.util.FriendshipDatabaseServiceConverter;
+import org.example.friendshipservice.util.friendship.grpc.FriendshipDatabaseServiceConverter;
 
 @GrpcService
 @RequiredArgsConstructor

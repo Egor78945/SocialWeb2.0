@@ -8,8 +8,8 @@ import net.devh.boot.grpc.server.service.GrpcService;
 import org.example.userdatabaseservice.model.UserProfileRequestModel;
 import org.example.userdatabaseservice.service.RoleService;
 import org.example.userdatabaseservice.service.UserService;
-import org.example.userdatabaseservice.util.builder.UserDatabaseServiceBuilder;
-import org.example.userdatabaseservice.util.converter.UserConverter;
+import org.example.userdatabaseservice.util.user.builder.grpc.UserDatabaseServiceBuilder;
+import org.example.userdatabaseservice.util.user.converter.grpc.UserConverter;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.example.authenticationservice.enumeration.role.user.UserRole;
 import org.example.authenticationservice.model.request.RegisterRequestModel;
-import org.example.authenticationservice.util.builder.user.UserDatabaseServiceBuilder;
+import org.example.authenticationservice.util.user.builder.grpc.UserDatabaseServiceBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

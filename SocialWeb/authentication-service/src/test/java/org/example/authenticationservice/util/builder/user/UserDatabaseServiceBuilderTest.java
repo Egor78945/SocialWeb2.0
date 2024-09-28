@@ -1,6 +1,7 @@
 package org.example.authenticationservice.util.builder.user;
 
 import com.example.grpc.user.UserDatabaseService;
+import org.example.authenticationservice.util.user.builder.grpc.UserDatabaseServiceBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

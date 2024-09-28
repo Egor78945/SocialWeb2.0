@@ -6,8 +6,8 @@ import org.example.authenticationservice.model.response.UserProfile;
 import org.example.authenticationservice.service.friendship.grpc.FriendshipGrpcService;
 import org.example.authenticationservice.service.user.grpc.UserGrpcService;
 import org.example.authenticationservice.service.user.UserService;
-import org.example.authenticationservice.util.builder.user.UserDatabaseServiceBuilder;
-import org.example.authenticationservice.util.converter.user.UserConverter;
+import org.example.authenticationservice.util.user.builder.grpc.UserDatabaseServiceBuilder;
+import org.example.authenticationservice.util.user.converter.UserConverter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

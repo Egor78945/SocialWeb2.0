@@ -4,7 +4,7 @@ import com.example.grpc.friendship.FriendshipDatabaseService;
 import com.example.grpc.friendship.FriendshipServiceGrpc;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.client.inject.GrpcClient;
-import org.example.authenticationservice.util.builder.friendship.FriendshipDatabaseServiceBuilder;
+import org.example.authenticationservice.util.friendship.builder.grpc.FriendshipDatabaseServiceBuilder;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -2,7 +2,7 @@ package org.example.messages3service.service.kafka.listener;
 
 import lombok.RequiredArgsConstructor;
 import org.example.messages3service.model.dto.response.MessageDataModel;
-import org.example.messages3service.service.s3.minio.MinIOService;
+import org.example.messages3service.service.message.s3.minio.MinIOService;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 

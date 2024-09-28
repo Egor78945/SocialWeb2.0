@@ -3,6 +3,7 @@ package org.example.authenticationservice.util.converter.user;
 import com.example.grpc.user.UserDatabaseService;
 import org.example.authenticationservice.enumeration.role.user.UserRole;
 import org.example.authenticationservice.model.response.UserProfile;
+import org.example.authenticationservice.util.user.converter.UserConverter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
