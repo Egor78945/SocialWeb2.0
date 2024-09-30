@@ -30,4 +30,11 @@ public class MessageAddress {
         this.recipientId = messageAddressModel.getRecipientId();
         this.sendDate = new Date(messageAddressModel.getTimestamp());
     }
+
+    public MessageAddress(Long id, Long senderId, Long recipientId, Date sendDate) {
+        this.id = id;
+        this.senderId = senderId;
+        this.recipientId = recipientId;
+        this.sendDate = sendDate;
+    }
 }

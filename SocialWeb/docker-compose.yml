@@ -12,16 +12,19 @@ services:
       - D:\postgres_datapart:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    restart: always
 
   service-discovery:
     container_name: service-discovery
     build: /service-discovery/.
+    restart: always
     ports:
       - "8761:8761"
 
   api-gateway:
     container_name: api-gateway
     build: /api-gateway/.
+    restart: always
     ports:
       - "8080:8080"
     depends_on:
@@ -30,9 +33,11 @@ services:
   authentication-service:
     container_name: authentication-service
     build: /authentication-service/.
+    restart: always
     depends_on:
       - postgres
       - api-gateway
+      - redis
 
   user-database-service:
     container_name: user-database-service
@@ -62,6 +67,9 @@ services:
     restart: always
     depends_on:
       - authentication-service
+      - kafka1
+      - kafka2
+      - kafka3
 
   message-s3-service:
     container_name: message-s3-service
@@ -69,6 +77,9 @@ services:
     restart: always
     depends_on:
       - authentication-service
+      - kafka1
+      - kafka2
+      - kafka3
 
   redis:
     image: redis:latest
@@ -77,6 +88,7 @@ services:
     environment:
       - REDIS_PORT=6379
       - REDIS_DATABASES=1
+    restart: always
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -85,6 +97,7 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "22181:2181"
+    restart: always
 
   minio:
     image: minio/minio:latest
@@ -98,6 +111,7 @@ services:
       - "9090:9090"
     volumes:
       - D:\minio_datapart:/var/lib/minio/data
+    restart: always
 
   kafka1:
     image: confluentinc/cp-kafka:latest
@@ -112,11 +126,11 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      restart: always
 
   kafka2:
     image: confluentinc/cp-kafka:latest
     depends_on:
-      - zookeeper
       - kafka1
     ports:
       - "29093:29093"
@@ -127,11 +141,11 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+      restart: always
 
   kafka3:
     image: confluentinc/cp-kafka:latest
     depends_on:
-      - zookeeper
       - kafka2
     ports:
       - "29094:29094"
@@ -142,3 +156,4 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 3
+    restart: always

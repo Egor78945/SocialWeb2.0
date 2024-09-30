@@ -1,4 +1,4 @@
-package org.example.j2ee.messageservice.service.message_address.grpc;
+package org.example.j2ee.messageservice.service.message.address.grpc;
 
 import com.example.grpc.message_address.MessageAddressDatabaseService;
 import com.example.grpc.message_address.MessageAddressServiceGrpc;
