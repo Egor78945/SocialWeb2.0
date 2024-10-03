@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface MessageAddressRepository extends JpaRepository<MessageAddress, Long> {
-    @Query("SELECT new org.example.messageaddressdbservice.messageaddressdbservice.model.entity.MessageAddress(id, senderId, recipientId, sendDate) FROM MessageAddress where senderId=?1 and recipientId=?2 or senderId=?2 and recipientId=?1")
+    @Query("SELECT new org.example.messageaddressdbservice.messageaddressdbservice.model.entity.MessageAddress(id, senderId, recipientId, sendDate) FROM MessageAddress where senderId=?1 and recipientId=?2 or senderId=?2 and recipientId=?1 ORDER BY sendDate")
     List<MessageAddress> findAllBySenderIdAndRecipientId(Long senderId, Long recipientId);
 }

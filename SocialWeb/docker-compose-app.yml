@@ -1,0 +1,61 @@
+version: '3.7'
+
+services:
+  service-discovery:
+    container_name: service-discovery
+    build: /service-discovery/.
+    restart: always
+    ports:
+      - "8761:8761"
+
+  api-gateway:
+    container_name: api-gateway
+    build: /api-gateway/.
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service-discovery
+
+  authentication-service:
+    container_name: authentication-service
+    build: /authentication-service/.
+    restart: always
+    depends_on:
+      - api-gateway
+
+  user-database-service:
+    container_name: user-database-service
+    build: /user-database-service/.
+    restart: always
+    depends_on:
+      - authentication-service
+
+  friendship-service:
+    container_name: friendship-service
+    build: /friendship-service/.
+    restart: always
+    depends_on:
+      - authentication-service
+
+  message-service:
+    container_name: message-service
+    build: /message-service/.
+    restart: always
+    depends_on:
+      - message-address-db-service
+      - message-s3-service
+
+  message-address-db-service:
+    container_name: message-address-db-service
+    build: /message-address-db-service/.
+    restart: always
+    depends_on:
+      - authentication-service
+
+  message-s3-service:
+    container_name: message-s3-service
+    build: /message-s3-service/.
+    restart: always
+    depends_on:
+      - authentication-service

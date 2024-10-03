@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.example.messageaddressdbservice.messageaddressdbservice.model.dto.kafka.response.MessageAddressModel;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "message_address")
@@ -19,7 +19,7 @@ public class MessageAddress {
     @Column(name = "recipient_id")
     private Long recipientId;
     @Column(name = "send_date")
-    private Date sendDate;
+    private Timestamp sendDate;
 
     public MessageAddress() {
 
@@ -28,10 +28,10 @@ public class MessageAddress {
     public MessageAddress(MessageAddressModel messageAddressModel) {
         this.senderId = messageAddressModel.getSenderId();
         this.recipientId = messageAddressModel.getRecipientId();
-        this.sendDate = new Date(messageAddressModel.getTimestamp());
+        this.sendDate = new Timestamp(messageAddressModel.getTimestamp());
     }
 
-    public MessageAddress(Long id, Long senderId, Long recipientId, Date sendDate) {
+    public MessageAddress(Long id, Long senderId, Long recipientId, Timestamp sendDate) {
         this.id = id;
         this.senderId = senderId;
         this.recipientId = recipientId;

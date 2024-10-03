@@ -31,6 +31,6 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: send_date
-                  type: date
+                  type: timestamp
                   constraints:
                     nullable: false

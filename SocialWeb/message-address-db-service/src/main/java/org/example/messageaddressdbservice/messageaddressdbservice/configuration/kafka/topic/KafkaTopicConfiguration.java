@@ -16,7 +16,7 @@ public class KafkaTopicConfiguration {
     public NewTopic dbSaveTopic(){
         return TopicBuilder
                 .name(kafkaProperties.getKAFKA_DB_SAVE_TOPIC())
-                .replicas(2)
+                .replicas(3)
                 .partitions(3)
                 .build();
     }

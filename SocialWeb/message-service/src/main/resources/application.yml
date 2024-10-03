@@ -9,7 +9,7 @@ spring:
       timeout: 100000
 
   kafka:
-    bootstrap-servers: kafka1:9092, kafka2:9092, kafka3:9092
+    bootstrap-servers: kafka1:9092, kafka2:9093, kafka3:9094
     listener:
       ack-mode: record
     consumer:

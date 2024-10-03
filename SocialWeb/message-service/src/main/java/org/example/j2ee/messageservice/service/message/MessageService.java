@@ -14,6 +14,8 @@ import org.example.j2ee.messageservice.service.user.grpc.UserGrpcService;
 import org.example.j2ee.messageservice.util.message.validator.MessageValidator;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -35,16 +37,16 @@ public class MessageService {
         } else if (!userGrpcService.existsUserById(UserDatabaseServiceBuilder.buildTo(recipientId)).getBoolean()) {
             throw new IllegalArgumentException(String.format("User with id %s is not found.", recipientId));
         }
-        Long currentTime = System.currentTimeMillis() + 10800000;
-        messageAddressService.sendMessageAddress(senderId, recipientId, currentTime);
-        messageS3Service.sendMessage(senderId, recipientId, currentTime, message);
+        Long currentTimeGMTP3 = System.currentTimeMillis()+10800000;
+        messageAddressService.sendMessageAddress(senderId, recipientId, currentTimeGMTP3);
+        messageS3Service.sendMessage(senderId, recipientId, currentTimeGMTP3, message);
     }
 
     public List<String> getMessageAddresses(Long recipientId) throws JsonProcessingException {
         Long senderId = redisService.readValueAs(redisService.getObject(RedisKey.CURRENT_KEY.name()), UserProfile.class).getId();
         return messageAddressService.getMessageAddressesBySenderIdAndRecipientId(senderId, recipientId).getMessageAddressResponsesList()
                 .stream()
-                .map(r -> Long.toString(r.getTimestamp()))
+                .map(r -> new Date(r.getTimestamp()).toString())
                 .toList();
     }
 }
