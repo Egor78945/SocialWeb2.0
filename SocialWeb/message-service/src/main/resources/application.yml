@@ -43,6 +43,9 @@ grpc:
     message-address-db-grpc-service:
       address: 'discovery:///message-address-db-service'
       negotiation-type: plaintext
+    message-s3-grpc-service:
+      address: 'discovery:///message-s3-service'
+      negotiation-type: plaintext
 
 
 server:

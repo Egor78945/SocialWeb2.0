@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.j2ee.messageservice.model.kafka.MessageAddressModel;
 import org.example.j2ee.messageservice.service.kafka.producer.KafkaDbProducer;
 import org.example.j2ee.messageservice.service.message.address.grpc.MessageAddressDatabaseGrpcService;
-import org.example.j2ee.messageservice.util.message_address.builder.grpc.MessageAddressDatabaseGrpcServiceBuilder;
+import org.example.j2ee.messageservice.util.message.address.builder.grpc.MessageAddressDatabaseGrpcServiceBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
