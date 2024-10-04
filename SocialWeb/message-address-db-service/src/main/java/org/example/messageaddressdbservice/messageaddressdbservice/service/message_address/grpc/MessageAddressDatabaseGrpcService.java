@@ -1,7 +1,7 @@
 package org.example.messageaddressdbservice.messageaddressdbservice.service.message_address.grpc;
 
-import com.example.grpc.message_address.MessageAddressDatabaseService;
-import com.example.grpc.message_address.MessageAddressServiceGrpc;
+import com.example.grpc.message.address.MessageAddressDatabaseService;
+import com.example.grpc.message.address.MessageAddressServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;

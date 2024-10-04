@@ -1,6 +1,6 @@
 package org.example.messageaddressdbservice.messageaddressdbservice.utils.message_address.builder.grpc;
 
-import com.example.grpc.message_address.MessageAddressDatabaseService;
+import com.example.grpc.message.address.MessageAddressDatabaseService;
 import org.example.messageaddressdbservice.messageaddressdbservice.model.entity.MessageAddress;
 
 public class MessageAddressDatabaseGrpcServiceBuilder {
