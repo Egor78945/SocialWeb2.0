@@ -1,4 +1,4 @@
-package org.example.userdatabaseservice.service;
+package org.example.userdatabaseservice.service.user;
 
 import lombok.RequiredArgsConstructor;
 import org.example.userdatabaseservice.model.UserProfileRequestModel;

@@ -1,4 +1,4 @@
-package org.example.userdatabaseservice.service;
+package org.example.userdatabaseservice.service.role;
 
 import lombok.RequiredArgsConstructor;
 import org.example.userdatabaseservice.model.entity.Role;
