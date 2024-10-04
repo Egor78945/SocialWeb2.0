@@ -1,3 +1,17 @@
 syntax = "proto3";
 
 package com.example.grpc.message.s3;
+
+message StringRequest {
+  string string = 1;
+}
+
+message ListStringRequest {
+  repeated StringRequest stringList = 1;
+}
+
+service MessageS3Service {
+  rpc getMessages(ListStringRequest) returns (ListStringRequest);
+}
+
+
