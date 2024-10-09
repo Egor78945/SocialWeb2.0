@@ -23,13 +23,15 @@ public class MessageS3GrpcService extends MessageS3ServiceGrpc.MessageS3ServiceI
                 .getStringListList()
                 .stream()
                 .map(MessageS3ServiceConverter::convert)
-                .peek(s -> {
-                    try {
-                        minIOService.getFromMessageBucket(s);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }).toList();
+                .map(s ->
+                        {
+                            try {
+                                return minIOService.getFromMessageBucket(s);
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                ).toList();
 
         MessageS3ServiceOuterClass.ListStringRequest listStringRequestList = MessageS3ServiceBuilder.build(messageList);
         responseObserver.onNext(listStringRequestList);

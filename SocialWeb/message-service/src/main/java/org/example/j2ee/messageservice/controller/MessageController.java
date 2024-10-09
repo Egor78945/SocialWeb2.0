@@ -2,6 +2,7 @@ package org.example.j2ee.messageservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import org.example.j2ee.messageservice.model.dto.message.MessageList;
 import org.example.j2ee.messageservice.service.message.MessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class MessageController {
     }
 
     @GetMapping
-    public ResponseEntity<List<String>> getMessages(@RequestParam("recipient") Long recipientId) throws JsonProcessingException {
-        return ResponseEntity.ok(messageService.getMessageAddresses(recipientId));
+    public ResponseEntity<String> getMessages(@RequestParam("recipient") Long recipientId) throws JsonProcessingException {
+        return ResponseEntity.ok(messageService.getMessageAddresses(recipientId).toString());
     }
 }

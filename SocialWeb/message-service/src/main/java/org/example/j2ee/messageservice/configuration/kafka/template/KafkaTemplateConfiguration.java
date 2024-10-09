@@ -2,8 +2,8 @@ package org.example.j2ee.messageservice.configuration.kafka.template;
 
 import lombok.RequiredArgsConstructor;
 import org.example.j2ee.messageservice.configuration.kafka.properties.KafkaProperties;
-import org.example.j2ee.messageservice.model.kafka.MessageAddressModel;
-import org.example.j2ee.messageservice.model.kafka.MessageDataModel;
+import org.example.j2ee.messageservice.model.dto.kafka.MessageAddressModel;
+import org.example.j2ee.messageservice.model.dto.kafka.MessageDataModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;

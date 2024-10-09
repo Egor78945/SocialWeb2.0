@@ -1,4 +1,4 @@
-package org.example.j2ee.messageservice.model.kafka;
+package org.example.j2ee.messageservice.model.dto.kafka;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

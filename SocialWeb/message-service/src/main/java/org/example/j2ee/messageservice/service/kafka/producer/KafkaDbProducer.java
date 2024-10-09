@@ -2,7 +2,7 @@ package org.example.j2ee.messageservice.service.kafka.producer;
 
 import lombok.RequiredArgsConstructor;
 import org.example.j2ee.messageservice.configuration.kafka.properties.KafkaProperties;
-import org.example.j2ee.messageservice.model.kafka.MessageAddressModel;
+import org.example.j2ee.messageservice.model.dto.kafka.MessageAddressModel;
 import org.example.j2ee.messageservice.service.kafka.KafkaService;
 import org.springframework.stereotype.Service;
 

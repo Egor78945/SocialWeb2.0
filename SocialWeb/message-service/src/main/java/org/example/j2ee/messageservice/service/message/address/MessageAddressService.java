@@ -1,8 +1,8 @@
 package org.example.j2ee.messageservice.service.message.address;
 
-import com.example.grpc.message_address.MessageAddressDatabaseService;
+import com.example.grpc.message.address.MessageAddressDatabaseService;
 import lombok.RequiredArgsConstructor;
-import org.example.j2ee.messageservice.model.kafka.MessageAddressModel;
+import org.example.j2ee.messageservice.model.dto.kafka.MessageAddressModel;
 import org.example.j2ee.messageservice.service.kafka.producer.KafkaDbProducer;
 import org.example.j2ee.messageservice.service.message.address.grpc.MessageAddressDatabaseGrpcService;
 import org.example.j2ee.messageservice.util.message.address.builder.grpc.MessageAddressDatabaseGrpcServiceBuilder;

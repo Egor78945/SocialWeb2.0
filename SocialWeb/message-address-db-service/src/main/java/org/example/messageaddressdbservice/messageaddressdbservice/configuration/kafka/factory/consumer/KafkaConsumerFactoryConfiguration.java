@@ -28,7 +28,7 @@ public class KafkaConsumerFactoryConfiguration {
 
     @Bean
     public ConsumerFactory<String, MessageAddressModel> messageAddressModelConsumerFactory(ObjectMapper objectMapper) {
-        var kafkaConsumerFactory = new DefaultKafkaConsumerFactory<String, MessageAddressModel>(kafkaConsumerProperties("org.example.j2ee.messageservice.model.kafka.MessageAddressModel", "org.example.messageaddressdbservice.messageaddressdbservice.model.dto.kafka.response.MessageAddressModel"));
+        var kafkaConsumerFactory = new DefaultKafkaConsumerFactory<String, MessageAddressModel>(kafkaConsumerProperties("org.example.j2ee.messageservice.model.dto.kafka.MessageAddressModel", "org.example.messageaddressdbservice.messageaddressdbservice.model.dto.kafka.response.MessageAddressModel"));
         kafkaConsumerFactory.setValueDeserializer(new JsonDeserializer<>(objectMapper));
 
         return kafkaConsumerFactory;

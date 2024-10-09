@@ -15,6 +15,7 @@ public class S3SaveTopicKafkaListener {
 
     @KafkaListener(topics = "${kafka.topic.s3.save}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "messageDataListenerContainerFactory")
     public void messageDataTopicListener(MessageDataModel messageDataModel) throws Exception {
+        System.out.println(messageDataModel);
         minIOService.saveToMessageBucket(messageDataModel.getMessageAddress(), new ByteArrayInputStream(messageDataModel.getMessage().getBytes()));
     }
 }

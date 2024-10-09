@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package com.example.grpc.message_address;
+package com.example.grpc.message.address;
 
 message LongLongRequest {
   int64 firstLong = 1;

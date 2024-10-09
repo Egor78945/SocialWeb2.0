@@ -1,4 +1,4 @@
-package org.example.j2ee.messageservice.model.user;
+package org.example.j2ee.messageservice.model.dto.user;
 
 import com.example.grpc.user.UserDatabaseService;
 import lombok.Data;
